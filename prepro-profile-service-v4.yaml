@@ -2783,12 +2783,12 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /topen-info/terms:
+  "/topen-info/terms":
     get:
       tags:
         - Topen Info APIs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       operationId: getTerms
       summary: Retrieve Terms Info
       description: This API retrieve Terms Info
@@ -2796,14 +2796,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/TopenInfoResponse'
+                        "$ref": "#/components/schemas/TopenInfoResponse"
               examples:
                 success:
                   summary: The request completed successfully
@@ -2813,24 +2813,27 @@ paths:
                       type: TERMS
                       value: String
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Invalid access token:
+                  summary: Invalid access token
+                  value:
+                    data: null
+                    message: Invalid access token
+                    code: '203015'
+                    status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
@@ -2842,20 +2845,23 @@ paths:
         '500':
           description: Internal server error.
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  /topen-info/conditions:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Internal server error
+                  value:
+                    data: null
+                    code: '100500'
+                    status: FAILURE
+                    message: Error detail message
+  "/topen-info/conditions":
     get:
       tags:
         - Topen Info APIs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       operationId: getConditions
       summary: Retrieve Conditions Info
       description: This API retrieve Conditions Info
@@ -2863,14 +2869,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/TopenInfoResponse'
+                        "$ref": "#/components/schemas/TopenInfoResponse"
               examples:
                 success:
                   summary: The request completed successfully
@@ -2880,24 +2886,27 @@ paths:
                       type: CONDITIONS
                       value: String
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Invalid access token:
+                  summary: Invalid access token
+                  value:
+                    data: null
+                    message: Invalid access token
+                    code: '203015'
+                    status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
@@ -2909,20 +2918,23 @@ paths:
         '500':
           description: Internal server error.
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  /topen-info/topenid-logo:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Internal server error
+                  value:
+                    data: null
+                    code: '100500'
+                    status: FAILURE
+                    message: Error detail message
+  "/topen-info/topenid-logo":
     get:
       tags:
         - Topen Info APIs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       operationId: getTopenIdLogo
       summary: Retrieve TopenID Logo
       description: This API retrieve TopenID Logo
@@ -2930,14 +2942,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/TopenImageResponse'
+                        "$ref": "#/components/schemas/TopenImageResponse"
               examples:
                 success:
                   summary: The request completed successfully
@@ -2947,24 +2959,27 @@ paths:
                       type: TOPENID_LOGO
                       value: String Base64
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Invalid access token:
+                  summary: Invalid access token
+                  value:
+                    data: null
+                    message: Invalid access token
+                    code: '203015'
+                    status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
@@ -2976,20 +2991,23 @@ paths:
         '500':
           description: Internal server error.
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  /topen-info/topen-group-logo:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Internal server error
+                  value:
+                    data: null
+                    code: '100500'
+                    status: FAILURE
+                    message: Error detail message
+  "/topen-info/topen-group-logo":
     get:
       tags:
         - Topen Info APIs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       operationId: getTopenGroupLogo
       summary: Retrieve Topen Group Logo
       description: This API retrieve Topen Group Logo
@@ -2997,14 +3015,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/TopenImageResponse'
+                        "$ref": "#/components/schemas/TopenImageResponse"
               examples:
                 success:
                   summary: The request completed successfully
@@ -3014,24 +3032,27 @@ paths:
                       type: TOPEN_GROUP_LOGO
                       value: String Base64
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Invalid access token:
+                  summary: Invalid access token
+                  value:
+                    data: null
+                    message: Invalid access token
+                    code: '203015'
+                    status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
@@ -3043,20 +3064,23 @@ paths:
         '500':
           description: Internal server error.
           content:
-            application/json:
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
-              example:
-                data: null
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  '/configurations/password-pattern':
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Internal server error
+                  value:
+                    data: null
+                    code: '100500'
+                    status: FAILURE
+                    message: Error detail message
+  "/configurations/password-pattern":
     get:
       tags:
         - Topen Configuration APIs
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       operationId: getPasswordPattern
       summary: Retrieve password pattern Info
       description: This API retrieve password pattern Info. This API requires RP access token
@@ -3086,14 +3110,17 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+              examples:
+                Invalid access token:
+                  summary: Invalid access token
+                  value:
+                    data: null
+                    message: Invalid access token
+                    code: '203015'
+                    status: FAILURE
         '403':
           description: Forbidden
           content:
@@ -3104,21 +3131,24 @@ paths:
                 Access denied:
                   summary: Access denied
                   value:
-                    data:
+                    data: null
                     message: Access denied
                     code: '203016'
                     status: FAILURE
         '500':
           description: Internal server error.
           content:
-            application/json:
+            "*/*":
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+              examples:
+                Access denied:
+                  summary: Internal server error
+                  value:
+                    data: null
+                    code: '100500'
+                    status: FAILURE
+                    message: Error detail message
 components:
   securitySchemes:
     bearerAuth:
