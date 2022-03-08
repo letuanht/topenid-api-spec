@@ -2796,7 +2796,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -2817,7 +2817,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2831,7 +2831,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2845,7 +2845,7 @@ paths:
         '500':
           description: Internal server error.
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2869,7 +2869,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -2890,7 +2890,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2904,7 +2904,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2918,7 +2918,7 @@ paths:
         '500':
           description: Internal server error.
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2942,7 +2942,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -2963,7 +2963,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2977,7 +2977,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2991,7 +2991,7 @@ paths:
         '500':
           description: Internal server error.
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3015,7 +3015,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -3036,7 +3036,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3050,7 +3050,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3064,7 +3064,7 @@ paths:
         '500':
           description: Internal server error.
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3088,7 +3088,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -3102,14 +3102,15 @@ paths:
                   value:
                     message: The request completed successfully
                     data:
-                      password: password pattern
+                      password: password patten
                       message: Mật khẩu phải có chữ HOA [A-Z], chữ thường [a-z], số [0-9] và từ 8 đến 30 ký tự
+                        8 ký tự
                     status: SUCCESS
                     code:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3123,7 +3124,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3137,7 +3138,7 @@ paths:
         '500':
           description: Internal server error.
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
