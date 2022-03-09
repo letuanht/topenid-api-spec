@@ -40,7 +40,6 @@ paths:
                 summary: client credentials
                 value:
                   grant_type: client_credentials
-                  scope: openid
         required: true
       responses:
         '201':
@@ -1289,28 +1288,13 @@ components:
     TokenRequest:
       type: object
       required:
-        - scope
         - grant_type
       properties:
-        username:
-          type: string
-          example: dat
-        password:
-          type: string
-          example: dat@12345
-        scope:
-          type: string
-          example: openid
         grant_type:
           type: string
           enum:
-            - password
             - client_credentials
-            - refresh_token
-          example: password
-        refresh_token:
-          type: string
-          example: dfhguHSDFSDIsugdsjkKDJFGDFKJ
+          example: client_credentials
     IntrospectRequest:
       type: object
       required:
