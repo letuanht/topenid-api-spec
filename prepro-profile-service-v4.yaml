@@ -2,7 +2,8 @@ openapi: 3.0.1
 info:
   title: Profile service
   version: v4
-  description: Please follow the release note for further information
+servers:
+  - url: Please follow the release note for further information
 tags:
   - name: Account APIs
   - name: OTP APIs
