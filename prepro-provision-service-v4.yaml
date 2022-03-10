@@ -14,26 +14,14 @@ paths:
       security:
         - bearerAuth: [ ]
       operationId: createTopenIDAccount
-      summary: Create a user topenid account
+      summary: Provision a user
       description: This API requires RP access token
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/CreateUserTopenIDAccountRequest"
+              "$ref": "#/components/schemas/CreateAccountRequest"
         required: true
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       responses:
         '201':
           description: Created
@@ -161,13 +149,6 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid email format
-                consent_receipt_is_null:
-                  summary: consent receipt is null
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: consent_receipt cannot be blank
                 invalid_consent_receipt:
                   summary: Invalid consent receipt
                   value:
@@ -178,7 +159,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -189,7 +170,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -214,17 +195,6 @@ paths:
   "/accounts/{username}":
     put:
       parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: username
           in: path
           required: true
@@ -241,7 +211,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UpdateInfoUserTopenIDAccountRequest"
+              "$ref": "#/components/schemas/UpdateUserProfileRequest"
         required: true
       responses:
         '200':
@@ -344,7 +314,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -355,7 +325,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -369,7 +339,7 @@ paths:
         '404':
           description: Username Not Found
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -434,14 +404,13 @@ components:
         code:
           type: string
           description: TBD, error code of detail error.
-    CreateUserTopenIDAccountRequest:
+    CreateAccountRequest:
       type: object
       required:
         - username
         - first_name
         - last_name
         - password
-        - consent_receipt
       properties:
         username:
           type: string
@@ -490,7 +459,7 @@ components:
           items:
             type: string
             example: 61c870402b9c37dfa3220c21
-    UpdateInfoUserTopenIDAccountRequest:
+    UpdateUserProfileRequest:
       type: object
       required:
         - first_name
