@@ -13,7 +13,7 @@ tags:
   - name: Topen Configuration APIs
 
 paths:
-  /account/registration:
+  "/account/registration":
     post:
       tags:
         - Account APIs
@@ -26,7 +26,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegistrationWithPhoneRequest'
+              "$ref": "#/components/schemas/RegistrationWithPhoneRequest"
         required: true
       responses:
         '201':
@@ -35,7 +35,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
@@ -51,142 +51,144 @@ paths:
                     data:
                       ht_id: '2828917688328040'
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 verification_id_null:
                   summary: Verification id null or blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: verification_id cannot be blank
                 verification_incorrect:
                   summary: Verification invalid
                   value:
-                    data: null
+                    data:
                     code: '202004'
                     status: FAILURE
                     message: Incorrect verification
                 verification_not_found:
                   summary: Verification not belong to client
                   value:
-                    data: null
+                    data:
                     code: '202002'
                     status: FAILURE
                     message: verification_id cannot be found
                 phone_number_existed:
                   summary: Phone number already registered
                   value:
-                    data: null
+                    data:
                     code: '202006'
                     status: FAILURE
-                    message: phone has been set as the primary contact of another account
+                    message: phone has been set as the primary contact of another
+                      account
                 first_name_null:
                   summary: First name null or blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: first_name cannot be blank
                 first_name_too_long:
                   summary: First name too long
                   value:
-                    data: null
+                    data:
                     code: '200004'
                     status: FAILURE
                     message: first_name's length must be less than 256
                 last_name_null:
                   summary: Last name null or blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: last_name cannot be blank
                 last_name_too_long:
                   summary: Last name too long
                   value:
-                    data: null
+                    data:
                     code: '200004'
                     status: FAILURE
                     message: last_name's length must be less than 256
                 password_null:
                   summary: Password null
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: password cannot be blank
                 password_invalid_format:
                   summary: Invalid password format
                   value:
-                    data: null
+                    data:
                     code: '200010'
                     status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
                 dob_invalid_format:
                   summary: Date of birth invalid format
                   value:
-                    data: null
+                    data:
                     code: '200002'
                     status: FAILURE
                     message: Invalid dob format
                 dob_user_under_18:
                   summary: User under 18
                   value:
-                    data: null
+                    data:
                     code: '203004'
                     status: FAILURE
                     message: Date of birth must be dd/MM/yyyy or earlier
                 gender_not_in_supported_list:
                   summary: Gender invalid
                   value:
-                    data: null
+                    data:
                     code: '200003'
                     status: FAILURE
                     message: gender isn't in supported list
                 consent_receipt_is_null:
                   summary: consent receipt is null
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: consent_receipt cannot be blank
                 invalid_consent_receipt:
                   summary: Invalid consent receipt
                   value:
-                    data: null
+                    data:
                     code: '203022'
                     status: FAILURE
                     message: Invalid consent receipt
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -195,13 +197,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /account/update-password:
+  "/account/update-password":
     put:
       tags:
         - Account APIs
@@ -214,7 +216,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePasswordRequest'
+              "$ref": "#/components/schemas/UpdatePasswordRequest"
         required: true
       responses:
         '200':
@@ -223,11 +225,11 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/UpdatePasswordResponse'
+                        "$ref": "#/components/schemas/UpdatePasswordResponse"
               examples:
                 update_successful:
                   summary: Update Successful
@@ -235,72 +237,74 @@ paths:
                     data:
                       ht_id: '2828917688328040'
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 current_password_blank:
                   summary: current_password cannot be blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: current_password cannot be blank
                 new_password_blank:
                   summary: new_password cannot be blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: new_password cannot be blank
                 new_password_invalid:
-                  summary: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                  summary: Password must be between 8 and 30 characters, contain a
+                    digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
                   value:
-                    data: null
+                    data:
                     code: '200010'
                     status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
                 new_password_match_old_password:
                   summary: The new password cannot be the same as the current password
                   value:
-                    data: null
+                    data:
                     code: '201001'
                     status: FAILURE
                     message: The new password cannot be the same as the current password
                 current_password_wrong:
                   summary: The Current Password is incorrect
                   value:
-                    data: null
+                    data:
                     code: '203001'
                     status: FAILURE
                     message: The Current Password is incorrect
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -309,12 +313,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 user_profile_not_found:
                   summary: User profile not found
                   value:
-                    data: null
+                    data:
                     code: '101101'
                     status: FAILURE
                     message: User profile was not found
@@ -323,13 +327,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /account/self-reset-password:
+  "/account/self-reset-password":
     patch:
       security:
         - bearerAuth: []
@@ -337,12 +341,13 @@ paths:
         - Account APIs
       operationId: resetPassword
       summary: Reset password on behalf of user
-      description: This API allows RP using the client access token to reset password on behalf of user
+      description: This API allows RP using the client access token to reset password
+        on behalf of user
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ResetPasswordRequest'
+              "$ref": "#/components/schemas/ResetPasswordRequest"
         required: true
       responses:
         '200':
@@ -351,77 +356,78 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         nullable: true
-                        example: null
+                        example:
               examples:
                 reset-password-successful:
                   summary: RP reset password for user successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
-                    data: null
+                    data:
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 verification_id_blank:
                   summary: verification_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: verification_id cannot be blank
                 password_blank:
                   summary: password cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: password cannot be blank
                 password_invalid_format:
                   summary: Invalid password format
                   value:
-                    data: null
+                    data:
                     code: '200010'
                     status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
                 incorrect_verification:
                   summary: Incorrect verification
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202004'
                     message: Incorrect verification
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -430,13 +436,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /account/force-password-reset:
+  "/account/force-password-reset":
     patch:
       security:
         - bearerAuth: []
@@ -449,7 +455,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ForceResetPasswordRequest'
+              "$ref": "#/components/schemas/ForceResetPasswordRequest"
         required: true
       responses:
         '200':
@@ -458,91 +464,92 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         nullable: true
-                        example: null
+                        example:
               examples:
                 reset-password-successful:
                   summary: RP reset password for user successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
-                    data: null
+                    data:
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 username_blank:
                   summary: username cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: username cannot be blank
                 current_password_blank:
                   summary: current_password cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: current_password cannot be blank
                 new_password_blank:
                   summary: new_password cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: new_password cannot be blank
                 new_password_invalid_format:
                   summary: Invalid password format
                   value:
-                    data: null
+                    data:
                     code: '200010'
                     status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
                 new_password_match_old_password:
                   summary: The new password cannot be the same as the current password
                   value:
-                    data: null
+                    data:
                     code: '201001'
                     status: FAILURE
                     message: The new password cannot be the same as the current password
                 incorrect_username:
                   summary: Username / Current password is incorrect
                   value:
-                    data: null
+                    data:
                     code: '203035'
                     status: FAILURE
                     message: Invalid user credentials
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -551,13 +558,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /consent/purposes/relying-party:
+  "/consent/purposes/relying-party":
     get:
       security:
         - bearerAuth: []
@@ -573,19 +580,19 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/SubscriptionConsentDto'
+                          "$ref": "#/components/schemas/SubscriptionConsentDto"
               examples:
                 retrieve_successful:
                   summary: Retrieve available consent items successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
                     data:
                       - id: 6127092044a4750a8bd857ba
@@ -596,11 +603,11 @@ paths:
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
@@ -609,7 +616,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 access_denied:
                   summary: Access denied
@@ -622,13 +629,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /account/{ht_id}/consent-receipts:
+  "/account/{ht_id}/consent-receipts":
     get:
       parameters:
         - name: ht_id
@@ -650,19 +657,19 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         type: array
                         items:
-                          $ref: '#/components/schemas/ConsentReceiptResponse'
+                          "$ref": "#/components/schemas/ConsentReceiptResponse"
               examples:
                 retrieve_successful:
                   summary: Retrieve available consent receipts successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
                     data:
                       - id: 6127092044a4750a8bd857ba
@@ -674,23 +681,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_blank:
                   summary: ht_id null or blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ht_id cannot be blank
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
@@ -699,7 +706,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 access_denied:
                   summary: Access denied
@@ -710,21 +717,21 @@ paths:
         '404':
           description: Not Found
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Not Found:
                   summary: ht_id cannot be found
                   value:
-                    data: null
+                    data:
                     code: '202007'
                     status: FAILURE
                     message: ht_id cannot be found
                 ht_id_is_empty:
                   summary: ht_id is empty
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200007'
                     message: The requested resource cannot be found
@@ -733,13 +740,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /verifications:
+  "/verifications":
     post:
       security:
         - bearerAuth: []
@@ -752,7 +759,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerificationCreationRequest'
+              "$ref": "#/components/schemas/VerificationCreationRequest"
             example:
               receiver: '0377884111'
               channel: PHONE
@@ -764,17 +771,17 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/VerificationResponse'
+                        "$ref": "#/components/schemas/VerificationResponse"
               examples:
                 create_verification_successful:
                   summary: create verification successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
                     data:
                       verification:
@@ -789,51 +796,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 receiver_cannot_be_blank:
                   summary: receiver cannot be blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: receiver cannot be blank
                 receiver_format_error:
                   summary: receiver has invalid format
                   value:
-                    data: null
+                    data:
                     code: '200002'
                     status: FAILURE
                     message: Invalid receiver format
                 channel_cannot_be_blank:
                   summary: channel cannot be blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: channel cannot be blank
                 channel_invalid:
                   summary: channel isn't in supported list
                   value:
-                    data: null
+                    data:
                     code: '200003'
                     status: FAILURE
                     message: channel isn't in supported list
                 template_code_cannot_be_blank:
                   summary: template_code cannot be blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: template_code cannot be blank
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
@@ -842,24 +849,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '203008'
                 status: FAILURE
-                message: The number of times requesting to issue OTP have reached the limitation
+                message: The number of times requesting to issue OTP have reached
+                  the limitation
         '500':
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /verifications/{verification_id}:
+  "/verifications/{verification_id}":
     patch:
       parameters:
         - name: verification_id
@@ -878,7 +886,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerificationUpdatedRequest'
+              "$ref": "#/components/schemas/VerificationUpdatedRequest"
         required: true
       responses:
         '200':
@@ -887,17 +895,17 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/VerificationResponse'
+                        "$ref": "#/components/schemas/VerificationResponse"
               examples:
                 verified_otp_successful:
                   summary: verified otp successful
                   value:
                     status: SUCCESS
-                    code: null
+                    code:
                     message: The request completed successfully
                     data:
                       verification:
@@ -912,58 +920,58 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 invalid_blank_verification_id:
                   summary: verification_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: verification_id cannot be blank
                 invalid_blank_otp:
                   summary: otp cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: otp cannot be blank
                 verification_is_verified:
                   summary: Incorrect verification
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202004'
                     message: Incorrect verification
                 incorrect_otp:
                   summary: Incorrect OTP
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '201002'
                     message: Incorrect OTP
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 status: FAILURE
                 code: '203015'
                 message: Invalid access token
         '404':
           description: Not Found
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Not Found:
                   summary: verification_id cannot be found
                   value:
-                    data: null
+                    data:
                     code: '202007'
                     status: FAILURE
                     message: verification_id cannot be found
@@ -972,13 +980,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 status: FAILURE
                 code: '100500'
                 message: Error detail message
-  /basic-info:
+  "/basic-info":
     get:
       tags:
         - Contact Info APIs
@@ -986,6 +994,14 @@ paths:
         - bearerAuth: []
       operationId: getBasicInfo
       summary: Get basic info of a user profile
+      parameters:
+        - name: TPXAuthorization
+          in: header
+          required: false
+          schema:
+            type: string
+          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
+      description: This API requires relying party access token or user access token.
       responses:
         '200':
           description: OK
@@ -993,40 +1009,68 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/BasicInfoResponseData'
+                  - "$ref": "#/components/schemas/BasicInfoResponseData"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                invalid_token:
+                  summary: invalid token
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203015'
+                    message: Invalid access token
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '101101'
+                    message: User profile not found
         '500':
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -1041,7 +1085,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProfileBasicInfoUpdateRequest'
+              "$ref": "#/components/schemas/ProfileBasicInfoUpdateRequest"
         required: true
       responses:
         '200':
@@ -1050,113 +1094,113 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         type: object
                         nullable: true
-                        example: null
+                        example:
               examples:
                 update_successful:
                   summary: Update Successful
                   value:
-                    data: null
+                    data:
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 lastname_invalid:
                   summary: Last name is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: lastname cannot be blank
                 lastname_invalid_length_too_long:
                   summary: Last name too long
                   value:
-                    data: null
+                    data:
                     code: '200004'
                     status: FAILURE
                     message: last_name's length must be less than 256
                 firstname_invalid:
                   summary: First & middle name is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: first_name cannot be blank
                 firstname_invalid_length_too_long:
                   summary: First & middle name too long
                   value:
-                    data: null
+                    data:
                     code: '200004'
                     status: FAILURE
                     message: first_name's length must be less than 256
                 gender_blank:
                   summary: Gender is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: gender cannot be blank
                 gender_invalid:
                   summary: Gender invalid
                   value:
-                    data: null
+                    data:
                     code: '200003'
                     status: FAILURE
                     message: gender isn't in supported list
                 dob_blank:
                   summary: Dob is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: dob cannot be blank
                 dob_invalid:
                   summary: Dob invalid format
                   value:
-                    data: null
+                    data:
                     code: '200002'
                     status: FAILURE
                     message: Invalid dob format
                 user_under_18:
                   summary: User under 18
                   value:
-                    data: null
+                    data:
                     code: '203004'
                     status: FAILURE
                     message: Date of birth must be 15/11/2003 or earlier
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1165,12 +1209,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 user_profile_not_found:
                   summary: User profile not found
                   value:
-                    data: null
+                    data:
                     code: '101101'
                     status: FAILURE
                     message: User profile was not found
@@ -1179,20 +1223,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contacts:
+  "/contacts":
     get:
       tags:
         - Contact Info APIs
       security:
         - bearerAuth: []
       operationId: getListContactInfo
-      summary: Retrieve contact list (emails, phones, postal addresses) of a user profile
+      summary: Retrieve contact list (emails, phones, postal addresses) of a user
+        profile
       parameters:
         - name: type
           in: query
@@ -1208,14 +1253,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/PersonalContactInfoResponse'
+                        "$ref": "#/components/schemas/PersonalContactInfoResponse"
               examples:
                 default:
                   summary: Type is not passed
@@ -1227,21 +1272,21 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           last_modified_date: 1625454349735
                       phones:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           last_modified_date: 1625454349735
                       addresses:
                         - id: string
                           primary: true
                           verified: false
-                          tags: null
+                          tags:
                           value: string
                           city: string
                           city_code: string
@@ -1252,7 +1297,7 @@ paths:
                           other: string
                           last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
                 type_is_email:
                   summary: Type Email
                   value:
@@ -1263,13 +1308,13 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           last_modified_date: 1625454349735
                       phones: []
                       addresses: []
                     status: SUCCESS
-                    code: null
+                    code:
                 type_is_phones:
                   summary: Type Phone
                   value:
@@ -1280,13 +1325,13 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           last_modified_date: 1625454349735
                       addresses: []
                       emails: []
                     status: SUCCESS
-                    code: null
+                    code:
                 type_is_address:
                   summary: Type Address
                   value:
@@ -1297,7 +1342,7 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           city: string
                           city_code: string
@@ -1310,43 +1355,43 @@ paths:
                       emails: []
                       phones: []
                     status: SUCCESS
-                    code: null
+                    code:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 not_supported_list:
                   summary: Contact type isn't in supported list
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200003'
                     message: type isn't in supported list
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1355,13 +1400,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/phones:
+  "/contact/phones":
     get:
       tags:
         - Contact Info APIs
@@ -1369,18 +1414,26 @@ paths:
         - bearerAuth: []
       operationId: getContactPhone
       summary: Retrieve phone list of a user profile
+      parameters:
+        - name: TPXAuthorization
+          in: header
+          required: false
+          schema:
+            type: string
+          description: This header is used for integration purpose only.
+      description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/PhoneContactInfoResponse'
+                        "$ref": "#/components/schemas/PhoneContactInfoResponse"
               examples:
                 type_is_phone:
                   summary: The request completed successfully
@@ -1392,44 +1445,72 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: '0382477999'
                           last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                invalid_token:
+                  summary: invalid token
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203015'
+                    message: Invalid access token
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '101101'
+                    message: User profile not found
         '500':
           description: Internal server error.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -1444,7 +1525,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddPhoneNumberRequest'
+              "$ref": "#/components/schemas/AddPhoneNumberRequest"
         required: true
       responses:
         '201':
@@ -1453,18 +1534,18 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactPhoneNumberResponse'
+                        "$ref": "#/components/schemas/ContactPhoneNumberResponse"
               examples:
                 request completed successfully:
                   summary: The request completed successfully
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
+                    code:
                     data:
                       ht_id: '2828917688328040'
                       phone:
@@ -1472,79 +1553,79 @@ paths:
                         value: '0912345678'
                         primary: false
                         verified: true
-                        tags: null
+                        tags:
                         last_modified_date: 1625454349735
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 verification_id_blank:
                   summary: Verification_id null or blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: verification_id cannot be blank
                 verification_id_incorrect:
                   summary: Verification_id incorrect
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202004'
                     message: Incorrect verification
                 verification_id_not_belong_to_client:
                   summary: Verification does not belong to Client
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202002'
                     message: verification_id cannot be found
                 phone_blank:
                   summary: Phone null or blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: phone cannot be blank
                 phone_invalid_format:
                   summary: Invalid  phone format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid phone format
                 phone_existed:
                   summary: Phone already exists
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202001'
                     message: phone has already existed
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1553,13 +1634,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/phones/{phone_id}:
+  "/contact/phones/{phone_id}":
     delete:
       tags:
         - Contact Info APIs
@@ -1580,7 +1661,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data: {}
@@ -1590,26 +1671,26 @@ paths:
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
-                    data: null
+                    code:
+                    data:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 phone_id cannot be blank:
                   summary: phone_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: phone_id cannot be blank
                 phone_is_primary_contact:
                   summary: cannot delete a primary contact
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202005'
                     message: Cannot delete a primary contact
@@ -1618,23 +1699,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1643,9 +1724,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: phone_id cannot be found
                 code: '202007'
                 status: FAILURE
@@ -1654,13 +1735,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/emails:
+  "/contact/emails":
     get:
       tags:
         - Contact Info APIs
@@ -1672,14 +1753,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/EmailContactInfoResponse'
+                        "$ref": "#/components/schemas/EmailContactInfoResponse"
               examples:
                 type_is_email:
                   summary: The request completed successfully
@@ -1691,33 +1772,33 @@ paths:
                         - id: string
                           primary: true
                           verified: true
-                          tags: null
+                          tags:
                           value: string
                           last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1726,9 +1807,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -1743,7 +1824,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactEmailAddingRequest'
+              "$ref": "#/components/schemas/ContactEmailAddingRequest"
         required: true
       responses:
         '201':
@@ -1752,11 +1833,11 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactEmailAddingResponse'
+                        "$ref": "#/components/schemas/ContactEmailAddingResponse"
               examples:
                 default:
                   summary: The request completed successfully
@@ -1768,36 +1849,36 @@ paths:
                         id: string
                         primary: false
                         verified: false
-                        tags: null
+                        tags:
                         value: string
                         last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 email_blank:
                   summary: email cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: email cannot be blank
                 invalid_email:
                   summary: email has invalid format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid email format
                 email_existed:
                   summary: email existed
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202001'
                     message: email has already existed
@@ -1806,9 +1887,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
@@ -1817,13 +1898,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/emails/{email_id}/verification:
+  "/contact/emails/{email_id}/verification":
     put:
       parameters:
         - name: email_id
@@ -1841,7 +1922,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactEmailVerificationRequest'
+              "$ref": "#/components/schemas/ContactEmailVerificationRequest"
         required: true
       responses:
         '200':
@@ -1850,11 +1931,11 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactEmailVerificationResponse'
+                        "$ref": "#/components/schemas/ContactEmailVerificationResponse"
               examples:
                 default:
                   summary: The request completed successfully
@@ -1866,43 +1947,43 @@ paths:
                         id: string
                         primary: false
                         verified: true
-                        tags: null
+                        tags:
                         value: string
                         last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 verification_id_blank:
                   summary: verification_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: verification_id cannot be blank
                 invalid_email:
                   summary: email_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: email_id cannot be blank
                 incorrect_verification.:
                   summary: Incorrect verification
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202004'
                     message: Incorrect verification
                 email_already_verified:
                   summary: email has already been verified
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203009'
                     message: The email has already been verified
@@ -1911,23 +1992,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1936,19 +2017,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Not Found:
                   summary: email_id cannot be found
                   value:
-                    data: null
+                    data:
                     code: '202007'
                     status: FAILURE
                     message: email_id cannot be found
                 email_id_is_empty:
                   summary: email_id is empty
                   value:
-                    data: null
+                    data:
                     code: '200007'
                     status: FAILURE
                     message: The requested resource cannot be found
@@ -1957,13 +2038,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/emails/{email_id}/primary:
+  "/contact/emails/{email_id}/primary":
     put:
       parameters:
         - name: email_id
@@ -1984,7 +2065,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data: {}
@@ -1992,81 +2073,82 @@ paths:
                 set_primary_email_successful:
                   summary: Set primary email successful
                   value:
-                    data: null
+                    data:
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 email_id_blank:
                   summary: email_id is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: email_id cannot be blank
                 email_has_been_used_as_primary:
                   summary: Email is primary of another account
                   value:
-                    data: null
+                    data:
                     code: '202006'
                     status: FAILURE
-                    message: email has been set as the primary contact of another account
+                    message: email has been set as the primary contact of another
+                      account
                 email_unverified:
                   summary: Email is unverified
                   value:
-                    data: null
+                    data:
                     code: '203003'
                     status: FAILURE
                     message: Cannot set primary for an unverified email
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
         '404':
           description: Not Found
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Not Found:
                   summary: Email id does not belong to user
                   value:
-                    data: null
+                    data:
                     code: '202007'
                     status: FAILURE
                     message: email_id cannot be found
                 email_id_is_empty:
                   summary: email_id is empty
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200007'
                     message: The requested resource cannot be found
@@ -2075,13 +2157,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/emails/{email_id}:
+  "/contact/emails/{email_id}":
     delete:
       tags:
         - Contact Info APIs
@@ -2102,7 +2184,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data: {}
@@ -2112,26 +2194,26 @@ paths:
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
-                    data: null
+                    code:
+                    data:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 email_id cannot be blank:
                   summary: email_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: email_id cannot be blank
                 email_is_primary_contact:
                   summary: cannot delete a primary contact
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202005'
                     message: Cannot delete a primary contact
@@ -2140,23 +2222,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2165,9 +2247,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: email_id cannot be found
                 code: '202007'
                 status: FAILURE
@@ -2176,13 +2258,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/addresses:
+  "/contact/addresses":
     get:
       tags:
         - Contact Info APIs
@@ -2194,14 +2276,14 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/AddressContactInfoResponse'
+                        "$ref": "#/components/schemas/AddressContactInfoResponse"
               examples:
                 type_is_email:
                   summary: The request completed successfully
@@ -2213,7 +2295,7 @@ paths:
                         - id: string
                           primary: true
                           verified: false
-                          tags: null
+                          tags:
                           value: string
                           city: string
                           city_code: string
@@ -2224,29 +2306,29 @@ paths:
                           other: string
                           last_modified_date: 1625454349735
                     status: SUCCESS
-                    code: null
+                    code:
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2255,9 +2337,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -2272,7 +2354,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactAddressAddingRequest'
+              "$ref": "#/components/schemas/ContactAddressAddingRequest"
         required: true
       responses:
         '201':
@@ -2281,18 +2363,18 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactAddressResponse'
+                        "$ref": "#/components/schemas/ContactAddressResponse"
               examples:
                 default:
                   summary: Add address successfully
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
+                    code:
                     data:
                       ht_id: '2828917688328040'
                       address:
@@ -2307,93 +2389,95 @@ paths:
                         city: string
                         primary: true
                         verified: false
-                        tags: null
+                        tags:
                         last_modified_date: 1625454349735
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 detail_address_blank:
                   summary: detail_address cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: detail_address cannot be blank
                 detail_address_over_max_length:
                   summary: detail_address cannot over max length
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200004'
                     message: detail_address's length must be less than 256
                 ward_code_blank:
                   summary: ward_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ward_code cannot be blank
                 district_code_blank:
                   summary: district_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: district_code cannot be blank
                 city_code_blank:
                   summary: city_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: city_code cannot be blank
                 city_code_can_not_found:
                   summary: city_code cannot be found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203005'
                     message: Province/City Code <city_code> cannot be found
                 ward_code_district_code_not_matched:
                   summary: ward_code and district_code not matched
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203006'
-                    message: Ward Code <ward_code> and District Code <district_code> were not matched
+                    message: Ward Code <ward_code> and District Code <district_code>
+                      were not matched
                 district_code_city_code_not_matched:
                   summary: district_code and city_code not found matched
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203007'
-                    message: District Code <district_code> and Province/City Code <city_code> were not matched
+                    message: District Code <district_code> and Province/City Code
+                      <city_code> were not matched
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2402,13 +2486,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/addresses/{address_id}/primary:
+  "/contact/addresses/{address_id}/primary":
     put:
       tags:
         - Contact Info APIs
@@ -2429,7 +2513,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data: {}
@@ -2437,46 +2521,46 @@ paths:
                 set_primary_email_successful:
                   summary: Set primary address successful
                   value:
-                    data: null
+                    data:
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 contact_id_blank:
                   summary: address_id is blank
                   value:
-                    data: null
+                    data:
                     code: '200001'
                     status: FAILURE
                     message: address_id cannot be blank
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2485,19 +2569,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Not Found:
                   summary: address_id cannot be found
                   value:
-                    data: null
+                    data:
                     code: '202007'
                     status: FAILURE
                     message: address_id cannot be found
                 address_id_is_empty:
                   summary: address_id is empty
                   value:
-                    data: null
+                    data:
                     code: '200007'
                     status: FAILURE
                     message: The requested resource cannot be found
@@ -2506,13 +2590,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /contact/addresses/{address_id}:
+  "/contact/addresses/{address_id}":
     put:
       tags:
         - Contact Info APIs
@@ -2530,7 +2614,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactAddressUpdateRequest'
+              "$ref": "#/components/schemas/ContactAddressUpdateRequest"
         required: true
       responses:
         '200':
@@ -2539,18 +2623,18 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactAddressResponse'
+                        "$ref": "#/components/schemas/ContactAddressResponse"
               examples:
                 default:
                   summary: Update address successfully
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
+                    code:
                     data:
                       ht_id: '2828917688328040'
                       address:
@@ -2565,100 +2649,102 @@ paths:
                         city: string
                         primary: true
                         verified: false
-                        tags: null
+                        tags:
                         last_modified_date: 1625454349735
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 id_blank:
                   summary: address_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: address_id cannot be blank
                 detail_address_blank:
                   summary: detail_address cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: detail_address cannot be blank
                 detail_address_over_max_length:
                   summary: detail_address cannot over max length
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200004'
                     message: detail_address's length must be less than 256
                 ward_code_blank:
                   summary: ward_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ward_code cannot be blank
                 district_code_blank:
                   summary: district_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: district_code cannot be blank
                 city_code_blank:
                   summary: city_code cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: city_code cannot be blank
                 city_code_can_not_found:
                   summary: city_code cannot be found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203005'
                     message: Province/City Code <city_code> cannot be found
                 ward_code_district_code_not_matched:
                   summary: ward_code and district_code not matched
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203006'
-                    message: Ward Code <ward_code> and District Code <district_code> were not matched
+                    message: Ward Code <ward_code> and District Code <district_code>
+                      were not matched
                 district_code_city_code_not_matched:
                   summary: district_code and city_code not found matched
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203007'
-                    message: District Code <district_code> and Province/City Code <city_code> were not matched
+                    message: District Code <district_code> and Province/City Code
+                      <city_code> were not matched
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2667,9 +2753,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: address_id cannot be found
                 code: '202007'
                 status: FAILURE
@@ -2678,9 +2764,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -2704,7 +2790,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data: {}
@@ -2714,26 +2800,26 @@ paths:
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
-                    data: null
+                    code:
+                    data:
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 contact_id cannot be blank:
                   summary: address_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: address_id cannot be blank
                 contact_is_primary_contact:
                   summary: cannot delete a primary contact
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202005'
                     message: Cannot delete a primary contact
@@ -2742,23 +2828,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -2767,9 +2853,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: address_id cannot be found
                 code: '202007'
                 status: FAILURE
@@ -2778,9 +2864,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -3162,7 +3248,7 @@ components:
         message:
           type: string
           nullable: true
-          example: null
+          example:
         status:
           type: string
           example: SUCCESS
@@ -3172,7 +3258,7 @@ components:
         code:
           type: string
           nullable: true
-          example: null
+          example:
     ErrorResponseData:
       type: object
       properties:
@@ -3181,7 +3267,7 @@ components:
         data:
           type: object
           nullable: true
-          example: null
+          example:
           description: Data is null when we got an error.
         status:
           type: string
@@ -3216,7 +3302,8 @@ components:
           type: string
           minLength: 8
           maxLength: 30
-          description: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
         gender:
           type: string
@@ -3245,7 +3332,8 @@ components:
           type: string
         new_password:
           type: string
-          description: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
     UpdatePasswordResponse:
       type: object
@@ -3264,7 +3352,8 @@ components:
           type: string
         password:
           type: string
-          description: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
     ForceResetPasswordRequest:
       type: object
@@ -3279,7 +3368,8 @@ components:
           type: string
         new_password:
           type: string
-          description: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
     ConsentReceiptResponse:
       type: object
@@ -3362,7 +3452,7 @@ components:
       type: object
       properties:
         verification:
-          $ref: '#/components/schemas/VerificationDto'
+          "$ref": "#/components/schemas/VerificationDto"
     PersonalContactInfoResponse:
       type: object
       properties:
@@ -3371,15 +3461,15 @@ components:
         addresses:
           type: array
           items:
-            $ref: '#/components/schemas/ContactAddressInfoDto'
+            "$ref": "#/components/schemas/ContactAddressInfoDto"
         emails:
           type: array
           items:
-            $ref: '#/components/schemas/ContactInfoDto'
+            "$ref": "#/components/schemas/ContactInfoDto"
         phones:
           type: array
           items:
-            $ref: '#/components/schemas/ContactInfoDto'
+            "$ref": "#/components/schemas/ContactInfoDto"
     EmailContactInfoResponse:
       type: object
       required:
@@ -3391,7 +3481,7 @@ components:
         emails:
           type: array
           items:
-            $ref: '#/components/schemas/ContactInfoDto'
+            "$ref": "#/components/schemas/ContactInfoDto"
     AddressContactInfoResponse:
       type: object
       required:
@@ -3403,7 +3493,7 @@ components:
         addresses:
           type: array
           items:
-            $ref: '#/components/schemas/ContactAddressInfoDto'
+            "$ref": "#/components/schemas/ContactAddressInfoDto"
     PhoneContactInfoResponse:
       type: object
       required:
@@ -3415,7 +3505,7 @@ components:
         phones:
           type: array
           items:
-            $ref: '#/components/schemas/ContactInfoDto'
+            "$ref": "#/components/schemas/ContactInfoDto"
     ContactInfoDto:
       type: object
       required:
@@ -3550,7 +3640,7 @@ components:
         code:
           type: string
           nullable: true
-          example: null
+          example:
         data:
           type: object
           properties:
@@ -3728,7 +3818,7 @@ components:
         ht_id:
           type: string
         address:
-          $ref: '#/components/schemas/ContactAddressDto'
+          "$ref": "#/components/schemas/ContactAddressDto"
     ContactEmailVerificationRequest:
       type: object
       required:
@@ -3745,7 +3835,7 @@ components:
         ht_id:
           type: string
         email:
-          $ref: '#/components/schemas/ContactInfoDto'
+          "$ref": "#/components/schemas/ContactInfoDto"
     ContactEmailAddingRequest:
       type: object
       required:
@@ -3762,7 +3852,7 @@ components:
         ht_id:
           type: string
         email:
-          $ref: '#/components/schemas/ContactInfoDto'
+          "$ref": "#/components/schemas/ContactInfoDto"
     TopenInfoResponse:
       type: object
       required:
