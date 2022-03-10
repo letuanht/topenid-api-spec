@@ -1,0 +1,504 @@
+openapi: 3.0.1
+info:
+  title: Provision service
+  version: v4
+servers:
+  - url: Please follow the release note for further information
+tags:
+  - name: Account APIs
+paths:
+  "/accounts":
+    post:
+      tags:
+        - Account APIs
+      security:
+        - bearerAuth: [ ]
+      operationId: createTopenIDAccount
+      summary: Create a user topenid account
+      description: This API requires RP access token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateUserTopenIDAccountRequest"
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        nullable: true
+                        example:
+              examples:
+                create_successful:
+                  summary: Create user TopenID Account successful
+                  value:
+                    data:
+                    message: The request completed successfully
+                    code:
+                    status: SUCCESS
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                username_null:
+                  summary: Username id null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: username cannot be blank
+                username_invalid_format:
+                  summary: Invalid username format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid username format
+                username_has_existed:
+                  summary: username has already existed
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: username has already existed
+                password_null:
+                  summary: Password null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: password cannot be blank
+                password_invalid_format:
+                  summary: Invalid password format
+                  value:
+                    data:
+                    code: '200010'
+                    status: FAILURE
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                first_name_null:
+                  summary: First name null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: first_name cannot be blank
+                first_name_too_long:
+                  summary: First name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: first_name's length must be less than 256
+                last_name_null:
+                  summary: Last name null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: last_name cannot be blank
+                last_name_too_long:
+                  summary: Last name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: last_name's length must be less than 256
+                gender_not_in_supported_list:
+                  summary: Gender invalid
+                  value:
+                    data:
+                    code: '200003'
+                    status: FAILURE
+                    message: gender isn't in supported list
+                dob_invalid_format:
+                  summary: Date of birth invalid format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid dob format
+                contact_phone_invalid_format:
+                  summary: Invalid contact phone format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid contact_phone format
+                contact_phone_duplicated_with_primary:
+                  summary: The contact phone has been duplicated with the primary phone
+                  value:
+                    data:
+                    code: '203037'
+                    status: FAILURE
+                    message: The contact phone has been duplicated with the primary phone
+                email_invalid_format:
+                  summary: Invalid email format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid email format
+                consent_receipt_is_null:
+                  summary: consent receipt is null
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: consent_receipt cannot be blank
+                invalid_consent_receipt:
+                  summary: Invalid consent receipt
+                  value:
+                    data:
+                    code: '203022'
+                    status: FAILURE
+                    message: Invalid consent receipt
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: Invalid access token
+                code: '203015'
+                status: FAILURE
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Access denied
+                  value:
+                    data:
+                    message: Access denied
+                    code: '203016'
+                    status: FAILURE
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                code: '100500'
+                status: FAILURE
+                message: Error detail message
+  "/accounts/{username}":
+    put:
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Account APIs
+      security:
+        - bearerAuth: [ ]
+      operationId: updateTopenIDAccount
+      summary: Update the information a user topenid account
+      description: This API requires RP access token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateInfoUserTopenIDAccountRequest"
+        required: true
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        nullable: true
+                        example:
+              examples:
+                update_successful:
+                  summary: Update the information a user TopenID Account successful
+                  value:
+                    data:
+                    message: The request completed successfully
+                    code:
+                    status: SUCCESS
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                username_null:
+                  summary: Username id null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: username cannot be blank
+                first_name_null:
+                  summary: First name null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: first_name cannot be blank
+                first_name_too_long:
+                  summary: First name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: first_name's length must be less than 256
+                last_name_null:
+                  summary: Last name null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: last_name cannot be blank
+                last_name_too_long:
+                  summary: Last name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: last_name's length must be less than 256
+                gender_not_in_supported_list:
+                  summary: Gender invalid
+                  value:
+                    data:
+                    code: '200003'
+                    status: FAILURE
+                    message: gender isn't in supported list
+                dob_invalid_format:
+                  summary: Date of birth invalid format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid dob format
+                contact_phone_invalid_format:
+                  summary: Invalid contact phone format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid contact_phone format
+                contact_phone_duplicated_with_primary:
+                  summary: The contact phone has been duplicated with the primary phone
+                  value:
+                    data:
+                    code: '203037'
+                    status: FAILURE
+                    message: The contact phone has been duplicated with the primary phone
+                email_invalid_format:
+                  summary: Invalid email format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid email format
+        '401':
+          description: Unauthorized
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: Invalid access token
+                code: '203015'
+                status: FAILURE
+        '403':
+          description: Forbidden
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Access denied
+                  value:
+                    data:
+                    message: Access denied
+                    code: '203016'
+                    status: FAILURE
+        '404':
+          description: Username Not Found
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Not Found:
+                  summary: username cannot be found
+                  value:
+                    data:
+                    code: '202007'
+                    status: FAILURE
+                    message: username cannot be found
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                code: '100500'
+                status: FAILURE
+                message: Error detail message
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ResponseData:
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+          example:
+        status:
+          type: string
+          example: SUCCESS
+          enum:
+            - SUCCESS
+            - FAILURE
+        code:
+          type: string
+          nullable: true
+          example:
+    ErrorResponseData:
+      type: object
+      properties:
+        message:
+          type: string
+        data:
+          type: object
+          nullable: true
+          example:
+          description: Data is null when we got an error.
+        status:
+          type: string
+          example: FAILURE
+          enum:
+            - SUCCESS
+            - FAILURE
+        code:
+          type: string
+          description: TBD, error code of detail error.
+    CreateUserTopenIDAccountRequest:
+      type: object
+      required:
+        - username
+        - first_name
+        - last_name
+        - password
+        - consent_receipt
+      properties:
+        username:
+          type: string
+          description: Username is the primary phone.
+            The phone format should contain 10 digits [0-9]
+          example: "0912345678"
+        password:
+          type: string
+          minLength: 8
+          maxLength: 30
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
+          example: hgn5lnshd4A
+        first_name:
+          type: string
+          maxLength: 255
+          example: Thảo Nguyên
+        last_name:
+          type: string
+          maxLength: 255
+          example: Trần
+        gender:
+          type: string
+          example: FEMALE
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        dob:
+          type: string
+          description: Date of birth. In format dd/MM/yyyy.
+          example: 20/01/1990
+        contact_phone:
+          type: string
+          description: The phone format should contain 10 digits [0-9]. It is different from the primary phone
+          example: "0908070605"
+        email:
+          type: string
+          example: tranthaonguyen@gmail.com
+        email_verified:
+          type: boolean
+          example: true
+        consent_receipt:
+          type: array
+          description: A list of consent purpose ID
+          items:
+            type: string
+            example: 61c870402b9c37dfa3220c21
+    UpdateInfoUserTopenIDAccountRequest:
+      type: object
+      required:
+        - first_name
+        - last_name
+      properties:
+        first_name:
+          type: string
+          maxLength: 255
+          example: Thảo Nguyên
+        last_name:
+          type: string
+          maxLength: 255
+          example: Trần
+        gender:
+          type: string
+          example: FEMALE
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        dob:
+          type: string
+          description: Date of birth. In format dd/MM/yyyy.
+          example: 20/01/1990
+        contact_phone:
+          type: string
+          description: The phone format should contain 10 digits [0-9]. It is different from the primary phone
+          example: "0908070605"
+        email:
+          type: string
+          example: tranthaonguyen@gmail.com
+        email_verified:
+          type: boolean
+          example: true
