@@ -161,6 +161,13 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid email format
+                email_verified_invalid_format:
+                  summary: Email verified invalid format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid email_verified format
                 invalid_consent_receipt:
                   summary: Invalid consent receipt
                   value:
@@ -334,6 +341,13 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid email format
+                email_verified_invalid_format:
+                  summary: Email verified invalid format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid email_verified format
         '401':
           description: Unauthorized
           content:
