@@ -37,7 +37,7 @@ paths:
                         example:
               examples:
                 create_successful:
-                  summary: Create user TopenID Account successful
+                  summary: Provision a user successfully
                   value:
                     data:
                     message: The request completed successfully
@@ -68,7 +68,7 @@ paths:
                   summary: username has already existed
                   value:
                     data:
-                    code: '200001'
+                    code: '202001'
                     status: FAILURE
                     message: username has already existed
                 password_null:
