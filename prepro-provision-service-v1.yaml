@@ -212,7 +212,7 @@ paths:
       security:
         - bearerAuth: [ ]
       operationId: updateTopenIDAccount
-      summary: Update the information a user topenid account
+      summary: Update RP profile
       description: This API requires RP access token
       requestBody:
         content:
@@ -235,7 +235,7 @@ paths:
                         example:
               examples:
                 update_successful:
-                  summary: Update the information a user TopenID Account successful
+                  summary: Update RP profile successfully
                   value:
                     data:
                     message: The request completed successfully
