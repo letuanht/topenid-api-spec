@@ -2943,15 +2943,15 @@ paths:
                     code: '100500'
                     status: FAILURE
                     message: Error detail message
-  "/topen-info/conditions":
+  "/topen-info/privacy":
     get:
       tags:
         - Topen Info APIs
       security:
         - bearerAuth: []
-      operationId: getConditions
-      summary: Retrieve Conditions Info
-      description: This API retrieve Conditions Info
+      operationId: getPrivacy
+      summary: Retrieve Privacy Info
+      description: This API retrieve Privacy Info
       responses:
         '200':
           description: OK
@@ -2970,7 +2970,7 @@ paths:
                   value:
                     message: The request completed successfully
                     data:
-                      type: CONDITIONS
+                      type: PRIVACY
                       value: String
                     status: SUCCESS
                     code:
