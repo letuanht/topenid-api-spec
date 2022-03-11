@@ -17,7 +17,7 @@ paths:
       tags:
         - Authentication APIs
       summary: Generate client access token
-      description: This API is used to generate client access token
+      description: "This API is used to generate client access token. \n When granting a new client access token, all old access tokens will invalid. Should keep the token unique in the system."
       operationId: generateClientToken
       parameters:
         - name: Client-Id
