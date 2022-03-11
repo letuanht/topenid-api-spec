@@ -49,7 +49,7 @@ paths:
                         example:
               examples:
                 create_successful:
-                  summary: Create user TopenID Account successful
+                  summary: Provision a user successfully
                   value:
                     data:
                     message: The request completed successfully
@@ -80,7 +80,7 @@ paths:
                   summary: username has already existed
                   value:
                     data:
-                    code: '200001'
+                    code: '202001'
                     status: FAILURE
                     message: username has already existed
                 password_null:
@@ -235,7 +235,7 @@ paths:
       security:
         - bearerAuth: [ ]
       operationId: updateTopenIDAccount
-      summary: Update the information a user topenid account
+      summary: Update RP profile
       description: This API requires RP access token
       requestBody:
         content:
@@ -258,7 +258,7 @@ paths:
                         example:
               examples:
                 update_successful:
-                  summary: Update the information a user TopenID Account successful
+                  summary: Update RP profile successfully
                   value:
                     data:
                     message: The request completed successfully
