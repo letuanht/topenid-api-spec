@@ -1067,8 +1067,8 @@ paths:
     post:
       tags:
         - Access Session APIs
-      summary: Get access session
-      description: Get access session with refresh token.
+      summary: Validate access_token whether it is valid or not
+      description: This API is used to validate an access_token whether it is valid or not.
       operationId: getRefreshedAccessSession
       parameters:
         - name: Client-Token
