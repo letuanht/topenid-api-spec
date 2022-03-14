@@ -1612,7 +1612,7 @@ paths:
         API” to request generate OTP. \n 2. Complete verifying OTP. RP calls “Verify
         OTP API” to verify user’s phone number. User input the received OTP which
         sent by TopenID. \n 3. Add the verified phone to user profile. RP calls ”API
-        POST/contact/phones” to add phone to user profile."
+        POST/contact-management/phones” to add phone to user profile."
       requestBody:
         content:
           application/json:
@@ -1949,7 +1949,7 @@ paths:
         - bearerAuth: []
       operationId: addContactEmail
       summary: Add an email address to user profile
-      description: This API allows” to add an email address to user profile with the
+      description: This API allows to add an email address to user profile with the
         unverified status.
       requestBody:
         content:
@@ -2077,7 +2077,7 @@ paths:
         OTP. RP calls “Verification API” to request generate OTP and deliver OTP to
         the requested email adding. \n 2. Complete verifying OTP. RP calls “Verify
         OTP API” to verify user’s phone number. User input the received OTP which
-        sent by TopenID. \n 3. Perform verifying email address. RP calls “API PUT/contact/emails/{email_id}/verification”
+        sent by TopenID. \n 3. Perform verifying email address. RP calls “API PUT/contact-management/emails/{email_id}/verify”
         to verify email address."
       requestBody:
         content:
@@ -2548,7 +2548,7 @@ paths:
         - bearerAuth: []
       operationId: addContactAddress
       summary: Add resident address to user profile
-      description: This APIs allow to add resident address to user profile
+      description: This API allow to add resident address to user profile
       requestBody:
         content:
           application/json:
