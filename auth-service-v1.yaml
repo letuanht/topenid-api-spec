@@ -68,7 +68,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 client_id_missing:
                   summary: Missing request header 'Client-Id' for method parameter of type String
@@ -117,7 +117,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 invalid_user_credential:
                   summary: Invalid client credentials
@@ -131,7 +131,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -176,7 +176,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 token_blank:
                   summary: token cannot be blank
@@ -190,7 +190,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -234,7 +234,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 account_lock_enabled_not_blank:
                   summary: account_lock_enabled cannot be blank
@@ -283,7 +283,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -294,7 +294,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -308,7 +308,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -352,7 +352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id_blank:
                   summary: ht_id is blank
@@ -387,7 +387,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -398,7 +398,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -412,7 +412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
@@ -433,7 +433,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -477,7 +477,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id_blank:
                   summary: ht_id is blank
@@ -512,7 +512,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -523,7 +523,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -537,7 +537,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
@@ -558,7 +558,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -596,7 +596,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id cannot be blank:
                   summary: ht_id cannot be blank
@@ -617,7 +617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -628,7 +628,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -642,7 +642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
@@ -663,7 +663,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -704,7 +704,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -715,7 +715,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -729,7 +729,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -773,7 +773,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 max_active_session_invalid_format:
                   summary: max_active_session_invalid_format
@@ -801,7 +801,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -812,7 +812,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -826,7 +826,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -868,7 +868,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 client_id_missing:
                   summary: Missing request header 'Client-Id'
@@ -939,7 +939,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 invalid_user_credential:
                   summary: Invalid user credentials
@@ -960,7 +960,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 invalid_consent_receipt:
                   summary: lack of valid consent receipt
@@ -988,7 +988,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -1030,7 +1030,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 client_id_missing:
                   summary: Missing request header 'Client-Id'
@@ -1058,7 +1058,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 invalid_user_credential:
                   summary: Invalid refresh token
@@ -1079,7 +1079,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 password_expired:
                   summary: password expired
@@ -1093,7 +1093,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -1141,7 +1141,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 session_id_blank:
                   summary: session_id blank
@@ -1162,7 +1162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -1173,7 +1173,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -1187,7 +1187,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -1231,7 +1231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 message: Invalid access token
@@ -1242,7 +1242,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               examples:
                 Access denied:
                   summary: Access denied
@@ -1256,7 +1256,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseFail'
+                $ref: '#/components/schemas/ErrorResponseData'
               example:
                 data: null
                 code: '100500'
@@ -1365,7 +1365,7 @@ components:
             - SUCCESS
             - FAILURE
       title: Response
-    ResponseFail:
+    ErrorResponseData:
       type: object
       properties:
         data:
