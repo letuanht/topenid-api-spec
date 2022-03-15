@@ -189,7 +189,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -200,7 +200,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -318,7 +318,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -329,7 +329,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -453,7 +453,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -464,7 +464,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -587,7 +587,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -598,7 +598,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -672,7 +672,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -774,7 +774,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -798,7 +798,7 @@ paths:
         '404':
           description: Not Found
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -932,7 +932,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1060,7 +1060,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1071,7 +1071,7 @@ paths:
         '404':
           description: Not Found
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1125,7 +1125,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1136,7 +1136,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1279,7 +1279,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1290,7 +1290,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1362,7 +1362,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -1482,7 +1482,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1493,7 +1493,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1540,7 +1540,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -1578,7 +1578,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1711,7 +1711,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1722,7 +1722,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1824,7 +1824,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1882,7 +1882,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -1920,7 +1920,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2162,7 +2162,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2282,7 +2282,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -2293,7 +2293,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2307,7 +2307,7 @@ paths:
         '404':
           description: Not Found
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2416,7 +2416,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2474,7 +2474,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -2519,7 +2519,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2681,7 +2681,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2765,7 +2765,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -2776,7 +2776,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -2972,7 +2972,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3084,7 +3084,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -3762,6 +3762,8 @@ components:
           "$ref": "#/components/schemas/VerificationDto"
     PersonalContactInfoResponse:
       type: object
+      required:
+        - ht_id
       properties:
         ht_id:
           type: string
@@ -3820,7 +3822,6 @@ components:
         - value
         - verified
         - primary
-        - tags
         - last_modified_date
       properties:
         id:
@@ -3846,6 +3847,18 @@ components:
           example: 1625454349735
           description: Unix timestamps in miliseconds.
     ContactAddressInfoDto:
+      required:
+        - id
+        - value
+        - primary
+        - city
+        - city_code
+        - district
+        - district_code
+        - ward
+        - ward_code
+        - other
+        - last_modified_date
       type: object
       properties:
         id:
@@ -3950,6 +3963,13 @@ components:
           example:
         data:
           type: object
+          required:
+            - ht_id
+            - first_name
+            - last_name
+            - dob
+            - gender
+            - active
           properties:
             ht_id:
               type: string
@@ -4004,7 +4024,6 @@ components:
             - value
             - verified
             - primary
-            - tags
             - last_modified_date
           properties:
             id:

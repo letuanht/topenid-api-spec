@@ -55,7 +55,7 @@ paths:
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -94,7 +94,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -108,7 +108,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -146,7 +146,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/IntrospectResponse"
               example:
@@ -163,7 +163,7 @@ paths:
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -177,7 +177,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -230,7 +230,7 @@ paths:
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -294,7 +294,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -308,7 +308,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -409,7 +409,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -444,7 +444,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -545,7 +545,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -580,7 +580,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -618,7 +618,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -661,7 +661,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -728,7 +728,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -760,7 +760,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -826,7 +826,7 @@ paths:
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -866,7 +866,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -880,7 +880,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -927,13 +927,13 @@ paths:
         '201':
           description: Created
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/AccessSessionResponse"
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1006,7 +1006,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1055,7 +1055,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1102,13 +1102,13 @@ paths:
         '201':
           description: Created
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/AccessSessionResponse"
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1138,7 +1138,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1173,7 +1173,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1232,7 +1232,7 @@ paths:
         '400':
           description: Bad request
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1264,7 +1264,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1278,7 +1278,7 @@ paths:
         '500':
           description: Internal Server Error
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               example:
@@ -1310,7 +1310,7 @@ paths:
         '200':
           description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/ResponseData"
@@ -1345,7 +1345,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            "*/*":
+            application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
@@ -1426,6 +1426,12 @@ components:
           example: dat
     IntrospectResponse:
       type: object
+      required:
+        - username
+        - active
+        - token_type
+        - client_id
+        - iat
       properties:
         code:
           type: string
@@ -1626,6 +1632,9 @@ components:
           description: blocking/unblocking reason.
     AccessSessionConfigurationRequest:
       type: object
+      required:
+        - max_active_session
+        - channel_dependency
       properties:
         max_active_session:
           type: integer
