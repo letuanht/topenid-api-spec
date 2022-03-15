@@ -3967,8 +3967,6 @@ components:
             - ht_id
             - first_name
             - last_name
-            - dob
-            - gender
             - active
           properties:
             ht_id:
