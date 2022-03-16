@@ -1067,8 +1067,8 @@ paths:
     post:
       tags:
         - Access Session APIs
-      summary: Validate access_token whether it is valid or not
-      description: This API is used to validate an access_token whether it is valid or not.
+      summary: Exchange refresh token for an active access session
+      description: This API is used when a new access token is needed without user credentials.
       operationId: getRefreshedAccessSession
       parameters:
         - name: Client-Token
