@@ -58,8 +58,6 @@ paths:
                   - type: object
                     properties:
                       data:
-                        required:
-                          - ht_id
                         properties:
                           ht_id:
                             type: string
@@ -3644,8 +3642,6 @@ components:
           example: hgn5lnshd4A
     UpdatePasswordResponse:
       type: object
-      required:
-        - ht_id
       properties:
         ht_id:
           type: string
@@ -3680,11 +3676,6 @@ components:
           example: hgn5lnshd4A
     ConsentReceiptResponse:
       type: object
-      required:
-        - id
-        - name
-        - description
-        - consented_date
       properties:
         id:
           type: string
@@ -3726,13 +3717,6 @@ components:
           description: The OTP in 6 digits format
     VerificationDto:
       type: object
-      required:
-        - id
-        - ht_id
-        - receiver
-        - channel
-        - verified
-        - expired_at
       properties:
         id:
           type: string
@@ -3762,8 +3746,6 @@ components:
           "$ref": "#/components/schemas/VerificationDto"
     PersonalContactInfoResponse:
       type: object
-      required:
-        - ht_id
       properties:
         ht_id:
           type: string
@@ -3781,9 +3763,6 @@ components:
             "$ref": "#/components/schemas/ContactInfoDto"
     EmailContactInfoResponse:
       type: object
-      required:
-        - ht_id
-        - emails
       properties:
         ht_id:
           type: string
@@ -3793,9 +3772,6 @@ components:
             "$ref": "#/components/schemas/ContactInfoDto"
     AddressContactInfoResponse:
       type: object
-      required:
-        - ht_id
-        - addresses
       properties:
         ht_id:
           type: string
@@ -3805,9 +3781,6 @@ components:
             "$ref": "#/components/schemas/ContactAddressInfoDto"
     PhoneContactInfoResponse:
       type: object
-      required:
-        - ht_id
-        - phones
       properties:
         ht_id:
           type: string
@@ -3817,12 +3790,6 @@ components:
             "$ref": "#/components/schemas/ContactInfoDto"
     ContactInfoDto:
       type: object
-      required:
-        - id
-        - value
-        - verified
-        - primary
-        - last_modified_date
       properties:
         id:
           type: string
@@ -3847,18 +3814,6 @@ components:
           example: 1625454349735
           description: Unix timestamps in miliseconds.
     ContactAddressInfoDto:
-      required:
-        - id
-        - value
-        - primary
-        - city
-        - city_code
-        - district
-        - district_code
-        - ward
-        - ward_code
-        - other
-        - last_modified_date
       type: object
       properties:
         id:
@@ -3911,12 +3866,6 @@ components:
           description: Unix timestamps in miliseconds.
     SubscriptionConsentDto:
       type: object
-      required:
-        - id
-        - name
-        - description
-        - mandatory
-        - owner
       properties:
         id:
           type: string
@@ -3963,11 +3912,6 @@ components:
           example:
         data:
           type: object
-          required:
-            - ht_id
-            - first_name
-            - last_name
-            - active
           properties:
             ht_id:
               type: string
@@ -4009,9 +3953,6 @@ components:
           example: '0912345678'
     ContactPhoneNumberResponse:
       type: object
-      required:
-        - ht_id
-        - phone
       properties:
         ht_id:
           type: string
@@ -4135,9 +4076,6 @@ components:
           type: string
     ContactAddressResponse:
       type: object
-      required:
-        - ht_id
-        - address
       properties:
         ht_id:
           type: string
@@ -4152,9 +4090,6 @@ components:
           type: string
     ContactEmailVerificationResponse:
       type: object
-      required:
-        - ht_id
-        - emails
       properties:
         ht_id:
           type: string
@@ -4169,9 +4104,6 @@ components:
           type: string
     ContactEmailAddingResponse:
       type: object
-      required:
-        - ht_id
-        - emails
       properties:
         ht_id:
           type: string
@@ -4179,9 +4111,6 @@ components:
           "$ref": "#/components/schemas/ContactInfoDto"
     TopenInfoResponse:
       type: object
-      required:
-        - type
-        - value
       properties:
         type:
           type: string
@@ -4189,9 +4118,6 @@ components:
           type: string
     TopenPasswordPatternResponse:
       type: object
-      required:
-        - pattern
-        - message
       properties:
         pattern:
           type: string
@@ -4199,9 +4125,6 @@ components:
           type: string
     TopenImageResponse:
       type: object
-      required:
-        - type
-        - value
       properties:
         type:
           type: string

@@ -1464,9 +1464,6 @@ components:
       title: Response
     ClientTokenResponse:
       type: object
-      required:
-        - access_token
-        - expires_in
       properties:
         access_token:
           type: string
@@ -1505,13 +1502,6 @@ components:
           example: String
     BlockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
-        - last_modified_date
-        - reason
       properties:
         ht_id:
           type: string
@@ -1552,11 +1542,6 @@ components:
           description: Seconds
     AccountLockingConfigurationResponse:
       type: object
-      required:
-        - client_id
-        - account_lock_enabled
-        - maximum_failed_login_attempts
-        - account_unlock_time
       properties:
         client_id:
           type: string
@@ -1571,11 +1556,6 @@ components:
           example: 300
     UnlockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
       properties:
         ht_id:
           type: string
@@ -1600,13 +1580,6 @@ components:
           example: String
     UnblockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
-        - last_modified_date
-        - reason
       properties:
         ht_id:
           type: string
@@ -1644,9 +1617,6 @@ components:
           example: true
     AccessSessionConfigurationResponse:
       type: object
-      required:
-        - max_active_session
-        - channel_dependency
       properties:
         max_active_session:
           type: integer
@@ -1669,14 +1639,6 @@ components:
           type: string
         data:
           type: object
-          required:
-            - access_token
-            - refresh_token
-            - id_token
-            - token_type
-            - session_id
-            - access_channel
-            - access_time
           properties:
             access_token:
               type: string
@@ -1715,9 +1677,6 @@ components:
             - FAILURE
     ActiveAccessSessionResponse:
       type: object
-      required:
-        - ht_id
-        - sessions
       properties:
         ht_id:
           type: string
