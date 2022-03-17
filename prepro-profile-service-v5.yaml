@@ -1101,6 +1101,12 @@ paths:
       summary: Get basic info of user
       description: This API allows to get basic info of user
       parameters:
+        - name: TPXAuthorization
+          in: header
+          required: false
+          schema:
+            type: string
+          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
         - name: Client-Token
           in: header
           required: true
@@ -1523,6 +1529,12 @@ paths:
       summary: Retrieve phone list of user profile
       description: This API allows to retrieve phone list of user profile
       parameters:
+        - name: TPXAuthorization
+          in: header
+          required: false
+          schema:
+            type: string
+          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
         - name: Client-Token
           in: header
           required: true
