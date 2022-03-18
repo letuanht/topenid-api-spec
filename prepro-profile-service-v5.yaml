@@ -1126,6 +1126,27 @@ paths:
               schema:
                 allOf:
                   - "$ref": "#/components/schemas/BasicInfoResponseData"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                invalid_token:
+                  summary: invalid token
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203015'
+                    message: Invalid access token
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
         '401':
           description: Unauthorized
           content:
@@ -1150,6 +1171,13 @@ paths:
                     data:
                     message: Access denied
                     code: '203016'
+                    status: FAILURE
+                Lack of valid consent receipt:
+                  summary: Lack of valid consent receipt
+                  value:
+                    data:
+                    message: Lack of valid consent receipt
+                    code: '203032'
                     status: FAILURE
         '500':
           description: Internal server error.
@@ -1573,7 +1601,29 @@ paths:
                           value: '0382477999'
                           last_modified_date: 1625454349735
                     status: SUCCESS
-                    code:
+                    code: null
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                invalid_token:
+                  summary: invalid token
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203015'
+                    message: Invalid access token
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
         '401':
           description: Unauthorized
           content:
@@ -1598,6 +1648,13 @@ paths:
                     data:
                     message: Access denied
                     code: '203016'
+                    status: FAILURE
+                Lack of valid consent receipt:
+                  summary: Lack of valid consent receipt
+                  value:
+                    data:
+                    message: Lack of valid consent receipt
+                    code: '203032'
                     status: FAILURE
         '500':
           description: Internal server error.
