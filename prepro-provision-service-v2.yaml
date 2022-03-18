@@ -140,6 +140,13 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid dob format
+                dob_user_under_18:
+                  summary: User under 18
+                  value:
+                    data:
+                    code: '203004'
+                    status: FAILURE
+                    message: Date of birth must be dd/MM/yyyy or earlier
                 contact_phone_invalid_format:
                   summary: Invalid contact phone format
                   value:
@@ -320,6 +327,13 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid dob format
+                dob_user_under_18:
+                  summary: User under 18
+                  value:
+                    data:
+                    code: '203004'
+                    status: FAILURE
+                    message: Date of birth must be dd/MM/yyyy or earlier
                 contact_phone_invalid_format:
                   summary: Invalid contact phone format
                   value:
@@ -348,6 +362,13 @@ paths:
                     code: '200002'
                     status: FAILURE
                     message: Invalid email_verified format
+                account_cannot_be_update:
+                  summary: The account cannot be updated
+                  value:
+                    data:
+                    code: '203038'
+                    status: FAILURE
+                    message: The account cannot be updated
         '401':
           description: Unauthorized
           content:
