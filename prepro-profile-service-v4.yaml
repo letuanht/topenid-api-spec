@@ -1024,6 +1024,13 @@ paths:
                     status: FAILURE
                     code: '203015'
                     message: Invalid access token
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
         '401':
           description: Unauthorized
           content:
@@ -1049,20 +1056,13 @@ paths:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
-        '404':
-          description: Not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                profile_not_found:
-                  summary: profile not found
+                Lack of valid consent receipt:
+                  summary: Lack of valid consent receipt
                   value:
                     data:
+                    message: Lack of valid consent receipt
+                    code: '203032'
                     status: FAILURE
-                    code: '101101'
-                    message: User profile not found
         '500':
           description: Internal server error.
           content:
@@ -1464,6 +1464,13 @@ paths:
                     status: FAILURE
                     code: '203015'
                     message: Invalid access token
+                profile_not_found:
+                  summary: profile not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
         '401':
           description: Unauthorized
           content:
@@ -1489,20 +1496,13 @@ paths:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
-        '404':
-          description: Not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                profile_not_found:
-                  summary: profile not found
+                Lack of valid consent receipt:
+                  summary: Lack of valid consent receipt
                   value:
                     data:
+                    message: Lack of valid consent receipt
+                    code: '203032'
                     status: FAILURE
-                    code: '101101'
-                    message: User profile not found
         '500':
           description: Internal server error.
           content:
@@ -2949,7 +2949,7 @@ paths:
         - Topen Info APIs
       security:
         - bearerAuth: []
-      operationId: getPrivacy
+      operationId: getConditions
       summary: Retrieve Privacy Info
       description: This API retrieve Privacy Info
       responses:
