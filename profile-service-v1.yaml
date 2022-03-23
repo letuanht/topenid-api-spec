@@ -1146,7 +1146,7 @@ paths:
                     data:
                     status: FAILURE
                     code: '202002'
-                    message: ht_id cannot be found
+                    message: username cannot be found
         '401':
           description: Unauthorized
           content:
@@ -1623,7 +1623,7 @@ paths:
                     data:
                     status: FAILURE
                     code: '202002'
-                    message: ht_id cannot be found
+                    message: username cannot be found
         '401':
           description: Unauthorized
           content:
