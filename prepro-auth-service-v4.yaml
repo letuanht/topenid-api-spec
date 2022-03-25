@@ -1367,6 +1367,133 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
+  "/accounts/{ht_id}":
+    delete:
+      tags:
+        - Account Management APIs
+      security:
+        - bearerAuth: [ ]
+      operationId: removeBlockedAccount
+      summary: Remove a blocked account
+      description: This API allows RP using the client access token to remove a blocked account
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+        - name: ht_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data: { }
+              examples:
+                default:
+                  summary: The request completed successfully
+                  value:
+                    message: The request completed successfully
+                    status: SUCCESS
+                    code:
+                    data:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                ht_id cannot be blank:
+                  summary: ht_id cannot be blank
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '200001'
+                    message: ht_id cannot be blank
+                ht_id_not_found:
+                  summary: ht_id not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
+                block_account_time_is_greater_than_minimize:
+                  summary: The account isn't enough the blocking time to remove
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203039'
+                    message: The account {ht_id} isn't enough the blocking time to remove
+                cannot_remove_account_not_being_blocked_all_RPs:
+                  summary: Cannot remove an account not being blocked at all RPs
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203040'
+                    message: The account {ht_id} cannot remove
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: Invalid access token
+                code: '203015'
+                status: FAILURE
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Access denied
+                  value:
+                    data:
+                    message: Access denied
+                    code: '203016'
+                    status: FAILURE
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: ht_id cannot be found
+                code: '202007'
+                status: FAILURE
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                code: '100500'
+                status: FAILURE
+                message: Error detail message
 components:
   securitySchemes:
     bearerAuth:
