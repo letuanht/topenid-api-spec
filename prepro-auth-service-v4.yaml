@@ -121,8 +121,7 @@ paths:
       tags:
         - Authentication APIs
       summary: Validate an access_token
-      description: This API is used to validate an access_token whether it is valid
-        or not.
+      description: This API is used to validate an access_token whether it is valid or not.
       operationId: introspectToken
       parameters:
         - name: Client-Token
@@ -131,6 +130,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -199,6 +204,12 @@ paths:
       operationId: lockingConfiguration
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -329,6 +340,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -340,7 +357,6 @@ paths:
           schema:
             type: string
       summary: Block an account for a reason
-      description: This api requires RP access token
       operationId: blockAccount
       requestBody:
         content:
@@ -465,6 +481,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -476,7 +498,6 @@ paths:
           schema:
             type: string
       summary: Unblock an account for a reason
-      description: This api requires RP access token
       operationId: unblockAccount
       requestBody:
         content:
@@ -596,9 +617,14 @@ paths:
         - bearerAuth: []
       operationId: unlockAccount
       summary: Unlock account manually
-      description: This api requires RP access token
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -714,6 +740,12 @@ paths:
       summary: Retrieve Access Session Configuration
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -1197,6 +1229,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -1301,6 +1339,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -1375,9 +1419,15 @@ paths:
         - bearerAuth: [ ]
       operationId: removeBlockedAccount
       summary: Remove a blocked account
-      description: This API allows RP using the client access token to remove a blocked account
+      description: This API allows RP remove a blocked account
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
