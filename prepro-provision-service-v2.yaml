@@ -429,6 +429,160 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
+  "/accounts/add":
+    post:
+      tags:
+        - Account APIs
+      security:
+        - bearerAuth: [ ]
+      operationId: addTopenIDAccount
+      summary: add TopenID account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddAccountRequest"
+        required: true
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: TPXAuthorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        properties:
+                          ht_id:
+                            type: string
+              examples:
+                create_successful:
+                  summary: Provision a user successfully
+                  value:
+                    data:
+                      ht_id: '2828917688328040'
+                    message: The request completed successfully
+                    code:
+                    status: SUCCESS
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                password_null:
+                  summary: Password null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: password cannot be blank
+                password_invalid_format:
+                  summary: Invalid password format
+                  value:
+                    data:
+                    code: '200010'
+                    status: FAILURE
+                    message: Password must be between 8 and 30 characters, contain
+                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
+                username_has_existed:
+                  summary: Username has already existed
+                  value:
+                    data:
+                    code: '202001'
+                    status: FAILURE
+                    message: username has already existed
+                consent_receipt_null:
+                  summary: Consent receipt null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: consent_receipt cannot be blank
+                invalid_consent_receipt:
+                  summary: Invalid consent receipt
+                  value:
+                    data:
+                    code: '203022'
+                    status: FAILURE
+                    message: Invalid consent receipt
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: Invalid access token
+                code: '203015'
+                status: FAILURE
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Access denied
+                  value:
+                    data:
+                    message: Access denied
+                    code: '203016'
+                    status: FAILURE
+        '404':
+          description: Username Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Not Found:
+                  summary: username cannot be found
+                  value:
+                    data:
+                    code: '202007'
+                    status: FAILURE
+                    message: username cannot be found
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                code: '100500'
+                status: FAILURE
+                message: Error detail message
 components:
   securitySchemes:
     bearerAuth:
