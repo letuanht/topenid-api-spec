@@ -15,7 +15,6 @@ paths:
         - bearerAuth: [ ]
       operationId: createTopenIDAccount
       summary: Provision a user
-      description: This API requires RP access token
       requestBody:
         content:
           application/json:
@@ -24,6 +23,12 @@ paths:
         required: true
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -227,6 +232,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -243,7 +254,6 @@ paths:
         - bearerAuth: [ ]
       operationId: updateTopenIDAccount
       summary: Update RP profile
-      description: This API requires RP access token
       requestBody:
         content:
           application/json:
@@ -552,3 +562,22 @@ components:
         email_verified:
           type: boolean
           example: true
+    AddAccountRequest:
+      type: object
+      required:
+        - password
+        - consent_receipt
+      properties:
+        password:
+          type: string
+          minLength: 8
+          maxLength: 30
+          description: Password must be between 8 and 30 characters, contain a digit[0-9],
+            a lower case letter[a-z], an upper case letter[A-Z]
+          example: hgn5lnshd4A
+        consent_receipt:
+          type: array
+          description: A list of consent purpose ID
+          items:
+            type: string
+            example: 61c870402b9c37dfa3220c21
