@@ -455,13 +455,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Bearer {client access token}
-        - name: TPXAuthorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
+          description: Bearer {TopenX user access token}
         - name: lang
           in: query
           schema:

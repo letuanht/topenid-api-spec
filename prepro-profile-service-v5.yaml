@@ -1161,21 +1161,12 @@ paths:
           required: true
           schema:
             type: string
-          description: |
-            Bearer {client/user access token}
-            - When Authorization header is user access token, TPXAuthorization will be ignored
-            - When Authorization header is client access token, TPXAuthorization will be used to identify account in TopenID
+          description: Bearer {user access token or TopenX user access token}
         - name: lang
           in: query
           schema:
             type: string
           description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: TPXAuthorization
-          in: header
-          required: false
-          schema:
-            type: string
-          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
       responses:
         '200':
           description: OK
@@ -1638,21 +1629,12 @@ paths:
           required: true
           schema:
             type: string
-          description: |
-            Bearer {client/user access token}
-            - When Authorization header is user access token, TPXAuthorization will be ignored
-            - When Authorization header is client access token, TPXAuthorization will be used to identify account in TopenID
+          description: Bearer {user access token or TopenX user access token}
         - name: lang
           in: query
           schema:
             type: string
           description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: TPXAuthorization
-          in: header
-          required: false
-          schema:
-            type: string
-          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
       responses:
         '200':
           description: OK

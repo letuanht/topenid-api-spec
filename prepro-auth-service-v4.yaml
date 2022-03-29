@@ -816,11 +816,16 @@ paths:
       summary: Access Session Configuration
       description: "Access Session Configuration:\n 1. Max active session: The maximum
         number of allowed active sessions \n 2. Channel dependency: \n+ True = Per
-        channel (Web browser, Mobile app): Default value\n+ False = All channels\n\n
-        ** This API requires Relying Party credential."
+        channel (Web browser, Mobile app): Default value\n+ False = All channels"
       operationId: accessSessionConfiguration
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -1228,7 +1233,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Bearer {client access token}
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -1595,6 +1600,7 @@ components:
         token:
           type: string
           example: dat
+          description: user access token or TopenX user access token
     IntrospectResponse:
       type: object
       required:
