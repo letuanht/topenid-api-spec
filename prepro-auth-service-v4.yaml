@@ -1898,3 +1898,4 @@ components:
           description: A list of consent purpose ID of RP
           example:
             - '2234949241839324'
+
