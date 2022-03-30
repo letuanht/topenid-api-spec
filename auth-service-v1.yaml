@@ -12,14 +12,13 @@ tags:
   - name: Account Management APIs
     description: Group of APIs to manage account
 paths:
-  /token:
+  "/client-access-token":
     post:
       tags:
         - Authentication APIs
-      summary: Get client access token
-      description: |-
-        Get access token when authenticating a relying parties
-      operationId: getToken
+      summary: Generate client access token
+      description: "This API is used to generate client access token. \n When granting a new client access token, all old access tokens will invalid. Should keep the token unique in the system."
+      operationId: generateClientToken
       parameters:
         - name: Client-Id
           in: header
@@ -31,191 +30,195 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenRequest'
-            examples:
-              client_credentials:
-                summary: client credentials
-                value:
-                  grant_type: client_credentials
-        required: true
       responses:
         '201':
           description: CREATED
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        "$ref": "#/components/schemas/ClientTokenResponse"
               examples:
-                client_credentials:
-                  summary: client credentials
+                client_access_token:
+                  summary: client access token
                   value:
-                    code: null
-                    data:
-                      token_type: Bearer
-                      expires_in: '3600'
-                      access_token: eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hO...
-                      scope: openid
-                      id_token: null
-                      refresh_token: null
                     message: The request completed successfully
                     status: SUCCESS
+                    code:
+                    data:
+                      access_token: eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hO...
+                      expires_in: 3600
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 client_id_missing:
-                  summary: Missing request header 'Client-Id' for method parameter of type String
+                  summary: Missing request header 'Client-Id' for method parameter
+                    of type String
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Id' for method parameter of type String
+                    message: Missing request header 'Client-Id' for method parameter
+                      of type String
                 client_secret_missing:
-                  summary: Missing request header 'Client-Secret' for method parameter of type String
+                  summary: Missing request header 'Client-Secret' for method parameter
+                    of type String
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Secret' for method parameter of type String
+                    message: Missing request header 'Client-Secret' for method parameter
+                      of type String
                 client_id_blank:
                   summary: client_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: client_id cannot be blank
                 client_secret_blank:
                   summary: client_secret cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: client_secret cannot be blank
-                grant_type_blank:
-                  summary: grant_type cannot be blank
-                  value:
-                    data: null
-                    status: FAILURE
-                    code: '200001'
-                    message: grant_type cannot be blank
-                invalid_grant_type:
-                  summary: Unsupported grant type value
-                  value:
-                    data: null
-                    status: FAILURE
-                    code: '203013'
-                    message: Unsupported grant type value
         '401':
-          description: Forbidden
+          description: Unauthorized
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
-                invalid_user_credential:
+                invalid_client_credential:
                   summary: Invalid client credentials
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203012'
                     message: Invalid client credentials
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /introspect:
+  "/introspect":
     post:
       tags:
         - Authentication APIs
-      summary: Validate an access token
-      description: |-
-        For validating an access token is valid or not. Please check the field value *data.active*:
-        - true: the token is valid
-        - false: the token is invalid
+      summary: Validate an access_token
+      description: This API is used to validate an access_token whether it is valid or not.
       operationId: introspectToken
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IntrospectRequest'
+              "$ref": "#/components/schemas/IntrospectRequest"
         required: true
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/IntrospectResponse'
+                "$ref": "#/components/schemas/IntrospectResponse"
               example:
-                code: null
+                code:
                 data:
-                  exp: null
+                  exp:
                   username: string
                   active: true
                   token_type: string
                   client_id: string
-                  iat: null
-                message: null
+                  iat:
+                message:
                 status: SUCCESS
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 token_blank:
                   summary: token cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: token cannot be blank
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /configuration/locking-account:
+  "/configurations/locking-account":
     post:
       tags:
         - Account Management APIs
       security:
         - bearerAuth: []
       summary: Account Locking Configuration
-      description: |-
-        Account Locking Configuration:
-         1. Enable status check lock account.
-         2. Config Maximum Failed Login Attempts (Null is the default value).
-         3. Config Seconds Locking time period (Null is the default value).
-
-         ** This API requires Relying Party Access Token.
+      description: "Account Locking Configuration:\n 1. Enable status check lock account.
+        \n 2. Config Maximum Failed Login Attempts (Null is the default value). \n
+        3. Config Seconds Locking time period (Null is the default value). \n\n **
+        This API requires Relying Party Access Token."
       operationId: lockingConfiguration
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountLockingConfigurationRequest'
+              "$ref": "#/components/schemas/AccountLockingConfigurationRequest"
         required: true
       responses:
         '201':
@@ -224,116 +227,136 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/AccountLockingConfigurationResponse'
+                        "$ref": "#/components/schemas/AccountLockingConfigurationResponse"
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 account_lock_enabled_not_blank:
                   summary: account_lock_enabled cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: account_lock_enabled cannot be blank
                 Invalid_account_lock_enabled_format:
                   summary: Invalid account_lock_enabled format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid account_lock_enabled format
                 Invalid_maximum_failed_login_attempts_format:
                   summary: Invalid maximum_failed_login_attempts format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid maximum_failed_login_attempts format
                 maximum_failed_login_attempts_over_max_zero:
-                  summary: maximum_failed_login_attempts value was gone over the max value or equal zero (= 0)
+                  summary: maximum_failed_login_attempts value was gone over the max
+                    value or equal zero (= 0)
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200008'
-                    message: maximum_failed_login_attempts must be greater than 0 and smaller or equal to <maximum value>
+                    message: maximum_failed_login_attempts must be greater than 0
+                      and smaller or equal to <maximum value>
                 Invalid_account_unlock_time_format:
                   summary: Invalid account_unlock_time format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid account_unlock_time format
                 account_unlock_time_over_max_zero:
-                  summary: account_unlock_time value was gone over the max value or equal zero (= 0)
+                  summary: account_unlock_time value was gone over the max value or
+                    equal zero (= 0)
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200008'
-                    message: account_unlock_time must be greater than 0 and smaller or equal to <maximum value>
+                    message: account_unlock_time must be greater than 0 and smaller
+                      or equal to <maximum value>
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /accounts/{ht_id}/block:
+  "/accounts/{ht_id}/block":
     post:
       tags:
         - Account Management APIs
       security:
         - bearerAuth: []
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: ht_id
           in: path
           required: true
           schema:
             type: string
       summary: Block an account for a reason
-      description: This api requires RP access token
       operationId: blockAccount
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BlockAccountRequest'
+              "$ref": "#/components/schemas/BlockAccountRequest"
         required: true
       responses:
         '201':
@@ -342,43 +365,43 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/BlockAccountResponse'
+                        "$ref": "#/components/schemas/BlockAccountResponse"
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_blank:
                   summary: ht_id is blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ht_id cannot be blank
                 reason_blank:
                   summary: reason is blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: reason cannot be blank
                 reason_too_long:
                   summary: reason too long
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200004'
                     message: reason's length must be less than 501
                 account_has_been_blocked:
                   summary: account has been blocked
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203028'
                     message: This account has been blocked
@@ -387,23 +410,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -412,53 +435,69 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202007'
                     message: ht_id cannot be found
                 ht_id_is_empty:
                   summary: ht_id is empty
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200007'
                     message: The requested resource cannot be found
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /accounts/{ht_id}/unblock:
-    patch:
+  "/accounts/{ht_id}/unblock":
+    put:
       tags:
         - Account Management APIs
       security:
         - bearerAuth: []
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: ht_id
           in: path
           required: true
           schema:
             type: string
       summary: Unblock an account for a reason
-      description: This api requires RP access token
       operationId: unblockAccount
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UnblockAccountRequest'
+              "$ref": "#/components/schemas/UnblockAccountRequest"
         required: true
       responses:
         '200':
@@ -467,43 +506,43 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/UnblockAccountResponse'
+                        "$ref": "#/components/schemas/UnblockAccountResponse"
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_blank:
                   summary: ht_id is blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ht_id cannot be blank
                 reason_blank:
                   summary: reason is blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: reason cannot be blank
                 reason_too_long:
                   summary: reason too long
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200004'
                     message: reason's length must be less than 501
                 account_not_blocked:
                   summary: account was not blocked
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203026'
                     message: This account wasn't blocked
@@ -512,23 +551,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -537,43 +576,59 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202007'
                     message: ht_id cannot be found
                 ht_id_is_empty:
                   summary: ht_id is empty
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200007'
                     message: The requested resource cannot be found
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /accounts/{ht_id}/unlock:
-    patch:
+  "/accounts/{ht_id}/unlock":
+    put:
       tags:
         - Account Management APIs
       security:
         - bearerAuth: []
       operationId: unlockAccount
       summary: Unlock account manually
-      description: This api requires RP access token
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: ht_id
           in: path
           required: true
@@ -583,32 +638,32 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/UnlockAccountResponse'
+                        "$ref": "#/components/schemas/UnlockAccountResponse"
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id cannot be blank:
                   summary: ht_id cannot be blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: ht_id cannot be blank
                 account_was_not_locked:
                   summary: ht_id wasn't locked
                   value:
-                    data: null
+                    data:
                     code: '203029'
                     status: FAILURE
                     message: This account wasn't locked
@@ -617,23 +672,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -642,19 +697,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 ht_id_cannot_found:
                   summary: ht_id cannot be found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202007'
                     message: ht_id cannot be found
                 ht_id_is_empty:
                   summary: ht_id is empty
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200007'
                     message: The requested resource cannot be found
@@ -663,13 +718,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /configuration/access-session:
+  "/configurations/access-session":
     get:
       tags:
         - Access Session APIs
@@ -677,25 +732,43 @@ paths:
         - bearerAuth: []
       operationId: fetchAccessSessionConfiguration
       summary: Retrieve Access Session Configuration
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/AccessSessionConfigurationResponse'
+                        "$ref": "#/components/schemas/AccessSessionConfigurationResponse"
               examples:
                 success:
                   summary: The request completed successfully
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
+                    code:
                     data:
                       max_active_session: 1
                       channel_dependency: true
@@ -704,23 +777,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -729,9 +802,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -741,20 +814,33 @@ paths:
       security:
         - bearerAuth: []
       summary: Access Session Configuration
-      description: |-
-        Access Session Configuration:
-         1. Max active session: The maximum number of allowed active sessions
-         2. Channel dependency:
-        + True = Per channel (Web browser, Mobile app): Default value
-        + False = All channels
-
-         ** This API requires Relying Party credential.
+      description: "Access Session Configuration:\n 1. Max active session: The maximum
+        number of allowed active sessions \n 2. Channel dependency: \n+ True = Per
+        channel (Web browser, Mobile app): Default value\n+ False = All channels"
       operationId: accessSessionConfiguration
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccessSessionConfigurationRequest'
+              "$ref": "#/components/schemas/AccessSessionConfigurationRequest"
         required: true
       responses:
         '201':
@@ -763,36 +849,37 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/AccessSessionConfigurationResponse'
+                        "$ref": "#/components/schemas/AccessSessionConfigurationResponse"
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 max_active_session_invalid_format:
                   summary: max_active_session_invalid_format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid max_active_session format
                 max_active_session_over_max_range:
                   summary: max_active_session_over_max_range
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200008'
-                    message: max_active_session must be greater than 0 and smaller or equal to 10
+                    message: max_active_session must be greater than 0 and smaller
+                      or equal to 10
                 channel_dependency_invalid_format:
                   summary: channel_dependency_invalid_format
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200002'
                     message: Invalid channel_dependency format
@@ -801,38 +888,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /access-session:
+  "/access-session":
     post:
       tags:
         - Access Session APIs
@@ -840,6 +927,17 @@ paths:
       description: Get new access session with user's credentials.
       operationId: getAccessSession
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: Client-Id
           in: header
           required: true
@@ -854,68 +952,70 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccessSessionRequest'
+              "$ref": "#/components/schemas/AccessSessionRequest"
         required: true
       responses:
         '201':
           description: Created
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AccessSessionResponse'
+                "$ref": "#/components/schemas/AccessSessionResponse"
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 client_id_missing:
                   summary: Missing request header 'Client-Id'
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Id' for method parameter of type String
+                    message: Missing request header 'Client-Id' for method parameter
+                      of type String
                 client_secret_missing:
                   summary: Missing request header 'Client-Secret'
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Secret' for method parameter of type String
+                    message: Missing request header 'Client-Secret' for method parameter
+                      of type String
                 username_blank:
                   summary: username blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: username cannot be blank
                 password_blank:
                   summary: password blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: password cannot be blank
                 access_channel_blank:
                   summary: access_channel blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: access_channel cannot be blank
                 access_channel_not_support:
                   summary: access_channel not supported
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200003'
                     message: access_channel isn't in supported list
                 account_un_active:
                   summary: un-activated user account
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203011'
                     message: Cannot authenticate an un-activated user account
@@ -930,28 +1030,28 @@ paths:
                 account_is_blocked:
                   summary: account is blocked
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203028'
                     message: This account has been blocked
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 invalid_user_credential:
                   summary: Invalid user credentials
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203010'
                     message: Invalid user credentials
                 invalid_client_credential:
                   summary: Invalid client credentials
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203012'
                     message: Invalid client credentials
@@ -960,48 +1060,59 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 invalid_consent_receipt:
                   summary: lack of valid consent receipt
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203032'
                     message: Lack of valid consent receipt
                 password_expired:
                   summary: password expired
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202008'
                     message: The password has expired
                 account_is_blocked_by_topenid:
                   summary: Account has been blocked by TopenID
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203033'
                     message: The account has been blocked
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /refreshed-access-session:
+  "/refreshed-access-session":
     post:
       tags:
         - Access Session APIs
-      summary: Get access session
-      description: Get access session with refresh token.
+      summary: Exchange refresh token for an active access session
+      description: This API is used when a new access token is needed without user credentials.
       operationId: getRefreshedAccessSession
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: Client-Id
           in: header
           required: true
@@ -1016,61 +1127,63 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RefreshAccessSessionRequest'
+              "$ref": "#/components/schemas/RefreshAccessSessionRequest"
         required: true
       responses:
         '201':
           description: Created
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/AccessSessionResponse'
+                "$ref": "#/components/schemas/AccessSessionResponse"
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 client_id_missing:
                   summary: Missing request header 'Client-Id'
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Id' for method parameter of type String
+                    message: Missing request header 'Client-Id' for method parameter
+                      of type String
                 client_secret_missing:
                   summary: Missing request header 'Client-Secret'
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203024'
-                    message: Missing request header 'Client-Secret' for method parameter of type String
+                    message: Missing request header 'Client-Secret' for method parameter
+                      of type String
                 refresh_token_blank:
                   summary: refresh_token blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: refresh_token cannot be blank
         '401':
           description: Unauthorized
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 invalid_user_credential:
                   summary: Invalid refresh token
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203014'
                     message: Invalid refresh token
                 invalid_client_credential:
                   summary: Invalid client credentials
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '203012'
                     message: Invalid client credentials
@@ -1079,27 +1192,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 password_expired:
                   summary: password expired
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202008'
                     message: The password has expired
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /sessions/{session_id}:
+  "/sessions/{session_id}":
     delete:
       security:
         - bearerAuth: []
@@ -1109,6 +1222,23 @@ paths:
       description: Revoke access session by sessionId.
       operationId: revokeAccessSession
       parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
         - name: session_id
           in: path
           required: true
@@ -1121,39 +1251,39 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
                         type: object
                         nullable: true
-                        example: null
+                        example:
               examples:
                 update_successful:
                   summary: revoke successful
                   value:
-                    data: null
+                    data:
                     message: The request completed successfully
-                    code: null
+                    code:
                     status: SUCCESS
         '400':
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 session_id_blank:
                   summary: session_id blank
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '200001'
                     message: session_id cannot be blank
                 session_id_not_found:
                   summary: session_id not found
                   value:
-                    data: null
+                    data:
                     status: FAILURE
                     code: '202002'
                     message: session_id cannot be found
@@ -1162,38 +1292,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
         '500':
           description: Internal Server Error
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-  /active-access-sessions:
+  "/active-access-sessions":
     get:
       tags:
         - Access Session APIs
@@ -1201,25 +1331,43 @@ paths:
         - bearerAuth: []
       operationId: fetchActiveAccessSessions
       summary: Retrieve List of Active Access Sessions with an access token
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
       responses:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/ResponseData'
+                  - "$ref": "#/components/schemas/ResponseData"
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ActiveAccessSessionResponse'
+                        "$ref": "#/components/schemas/ActiveAccessSessionResponse"
               examples:
                 success:
                   summary: The request completed successfully
                   value:
                     message: The request completed successfully
                     status: SUCCESS
-                    code: null
+                    code:
                     data:
                       ht_id: '2828917688328040'
                       sessions:
@@ -1231,23 +1379,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
                 message: Invalid access token
                 code: '203015'
                 status: FAILURE
         '403':
           description: Forbidden
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               examples:
                 Access denied:
                   summary: Access denied
                   value:
-                    data: null
+                    data:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
@@ -1256,9 +1404,142 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseData'
+                "$ref": "#/components/schemas/ErrorResponseData"
               example:
-                data: null
+                data:
+                code: '100500'
+                status: FAILURE
+                message: Error detail message
+  "/accounts/{ht_id}":
+    delete:
+      tags:
+        - Account Management APIs
+      security:
+        - bearerAuth: [ ]
+      operationId: removeBlockedAccount
+      summary: Remove a blocked account
+      description: This API allows RP remove a blocked account
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+        - name: ht_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data: { }
+              examples:
+                default:
+                  summary: The request completed successfully
+                  value:
+                    message: The request completed successfully
+                    status: SUCCESS
+                    code:
+                    data:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                ht_id cannot be blank:
+                  summary: ht_id cannot be blank
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '200001'
+                    message: ht_id cannot be blank
+                ht_id_not_found:
+                  summary: ht_id not found
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '202002'
+                    message: ht_id cannot be found
+                block_account_time_is_greater_than_minimize:
+                  summary: The account isn't enough the blocking time to remove
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203039'
+                    message: The account {ht_id} isn't enough the blocking time to remove
+                cannot_remove_account_not_being_blocked_all_RPs:
+                  summary: Cannot remove an account not being blocked at all RPs
+                  value:
+                    data:
+                    status: FAILURE
+                    code: '203040'
+                    message: The account {ht_id} cannot remove
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: Invalid access token
+                code: '203015'
+                status: FAILURE
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              examples:
+                Access denied:
+                  summary: Access denied
+                  value:
+                    data:
+                    message: Access denied
+                    code: '203016'
+                    status: FAILURE
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
+                message: ht_id cannot be found
+                code: '202007'
+                status: FAILURE
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponseData"
+              example:
+                data:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
@@ -1275,7 +1556,7 @@ components:
         message:
           type: string
           nullable: true
-          example: null
+          example:
         status:
           type: string
           example: SUCCESS
@@ -1285,17 +1566,32 @@ components:
         code:
           type: string
           nullable: true
-          example: null
+          example:
     TokenRequest:
       type: object
       required:
+        - scope
         - grant_type
       properties:
+        username:
+          type: string
+          example: dat
+        password:
+          type: string
+          example: dat@12345
+        scope:
+          type: string
+          example: openid
         grant_type:
           type: string
           enum:
+            - password
             - client_credentials
-          example: client_credentials
+            - refresh_token
+          example: password
+        refresh_token:
+          type: string
+          example: dfhguHSDFSDIsugdsjkKDJFGDFKJ
     IntrospectRequest:
       type: object
       required:
@@ -1304,8 +1600,15 @@ components:
         token:
           type: string
           example: dat
+          description: user access token or TopenX user access token
     IntrospectResponse:
       type: object
+      required:
+        - username
+        - active
+        - token_type
+        - client_id
+        - iat
       properties:
         code:
           type: string
@@ -1336,34 +1639,14 @@ components:
             - SUCCESS
             - FAILURE
       title: Response
-    TokenResponse:
+    ClientTokenResponse:
       type: object
       properties:
-        code:
+        access_token:
           type: string
-        data:
-          type: object
-          properties:
-            token_type:
-              type: string
-            expires_in:
-              type: integer
-              format: int32
-            access_token:
-              type: string
-            scope:
-              type: string
-            id_token:
-              type: string
-            refresh_token:
-              type: string
-        message:
-          type: string
-        status:
-          type: string
-          enum:
-            - SUCCESS
-            - FAILURE
+        expires_in:
+          type: integer
+          format: int32
       title: Response
     ErrorResponseData:
       type: object
@@ -1371,7 +1654,7 @@ components:
         data:
           type: object
           nullable: true
-          example: null
+          example:
           description: Data is null when we got an error.
         message:
           type: string
@@ -1396,13 +1679,6 @@ components:
           example: String
     BlockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
-        - last_modified_date
-        - reason
       properties:
         ht_id:
           type: string
@@ -1443,11 +1719,6 @@ components:
           description: Seconds
     AccountLockingConfigurationResponse:
       type: object
-      required:
-        - client_id
-        - account_lock_enabled
-        - maximum_failed_login_attempts
-        - account_unlock_time
       properties:
         client_id:
           type: string
@@ -1462,11 +1733,6 @@ components:
           example: 300
     UnlockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
       properties:
         ht_id:
           type: string
@@ -1491,13 +1757,6 @@ components:
           example: String
     UnblockAccountResponse:
       type: object
-      required:
-        - ht_id
-        - locked
-        - blocked
-        - active
-        - last_modified_date
-        - reason
       properties:
         ht_id:
           type: string
@@ -1523,6 +1782,9 @@ components:
           description: blocking/unblocking reason.
     AccessSessionConfigurationRequest:
       type: object
+      required:
+        - max_active_session
+        - channel_dependency
       properties:
         max_active_session:
           type: integer
@@ -1532,9 +1794,6 @@ components:
           example: true
     AccessSessionConfigurationResponse:
       type: object
-      required:
-        - max_active_session
-        - channel_dependency
       properties:
         max_active_session:
           type: integer
@@ -1557,14 +1816,6 @@ components:
           type: string
         data:
           type: object
-          required:
-            - access_token
-            - refresh_token
-            - id_token
-            - token_type
-            - session_id
-            - access_channel
-            - access_time
           properties:
             access_token:
               type: string
@@ -1603,16 +1854,13 @@ components:
             - FAILURE
     ActiveAccessSessionResponse:
       type: object
-      required:
-        - ht_id
-        - sessions
       properties:
         ht_id:
           type: string
         sessions:
           type: array
           items:
-            $ref: '#/components/schemas/ActiveAccessSessionDto'
+            "$ref": "#/components/schemas/ActiveAccessSessionDto"
     ActiveAccessSessionDto:
       type: object
       properties:
@@ -1650,3 +1898,4 @@ components:
           description: A list of consent purpose ID of RP
           example:
             - '2234949241839324'
+
