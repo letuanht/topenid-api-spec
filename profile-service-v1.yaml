@@ -42,6 +42,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -228,8 +234,7 @@ paths:
         - bearerAuth: []
       operationId: updatePassword
       summary: RP to change password for user under the user's authorization
-      description: This API allows RP to change password for user under the user's
-        authorization
+      description: This API allows RP to change password for user under the user's authorization
       requestBody:
         content:
           application/json:
@@ -243,6 +248,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -371,8 +382,7 @@ paths:
         - Account APIs
       operationId: resetPassword
       summary: Reset password on behalf of user
-      description: This API allows RP using the client access token to reset password
-        on behalf of user
+      description: This API allows RP reset password on behalf of user
       requestBody:
         content:
           application/json:
@@ -381,6 +391,12 @@ paths:
         required: true
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -492,7 +508,6 @@ paths:
         - Account APIs
       operationId: forceResetPassword
       summary: RP force reset password for user
-      description: This API requires RP access token
       requestBody:
         content:
           application/json:
@@ -501,6 +516,12 @@ paths:
         required: true
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -627,9 +648,14 @@ paths:
       operationId: getConsentByReplyingParty
       summary: Fetch the consent list to get user approval
       description: This API allows to fetch the consent list to get user approval.
-        This API requires the Relying Party Access Token.
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -711,6 +737,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -727,8 +759,7 @@ paths:
         - Consents APIs
       operationId: getConsentReceiptByHtId
       summary: Fetch the consent receipt list of user
-      description: " This API allows to fetch the consent receipt list of user. This
-        API requires Relying Party Access Token."
+      description: This API allows to fetch the consent receipt list of user. This
       responses:
         '200':
           description: OK
@@ -853,6 +884,15 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: |
+            Bearer {client/user access token}
+            - When register new account, authorization header should be client access token
+            - When update user contact information, authorization header should be user access token
         - name: lang
           in: query
           schema:
@@ -970,6 +1010,15 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: |
+            Bearer {client/user access token}
+            - When register new account, authorization header should be client access token
+            - When update user contact information, authorization header should be user access token
         - name: lang
           in: query
           schema:
@@ -1107,17 +1156,17 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token or TopenX user access token}
         - name: lang
           in: query
           schema:
             type: string
           description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: TPXAuthorization
-          in: header
-          required: false
-          schema:
-            type: string
-          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
       responses:
         '200':
           description: OK
@@ -1211,6 +1260,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -1375,6 +1430,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -1563,17 +1624,17 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token or TopenX user access token}
         - name: lang
           in: query
           schema:
             type: string
           description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: TPXAuthorization
-          in: header
-          required: false
-          schema:
-            type: string
-          description: This header is used for integration purpose only. This header must start with "Bearer ", and followed with a valid TopenX token.
       responses:
         '200':
           description: OK
@@ -1693,6 +1754,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -1827,6 +1894,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -1940,6 +2013,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2031,6 +2110,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2123,6 +2208,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2281,6 +2372,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2419,6 +2516,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2532,6 +2635,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2629,6 +2738,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2786,6 +2901,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -2902,6 +3023,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -3087,6 +3214,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
@@ -3200,6 +3333,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -3280,6 +3419,12 @@ paths:
       description: This API retrieve Privacy Info
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
@@ -3370,6 +3515,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -3455,6 +3606,12 @@ paths:
           schema:
             type: string
           description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
         - name: lang
           in: query
           schema:
@@ -3532,9 +3689,15 @@ paths:
         - bearerAuth: []
       operationId: getPasswordPattern
       summary: Retrieve password pattern Info
-      description: This API retrieve password pattern Info. This API requires RP access token
+      description: This API retrieve password pattern Info.
       parameters:
         - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
           in: header
           required: true
           schema:
