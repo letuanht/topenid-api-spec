@@ -1343,7 +1343,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Bearer {client access token}
+          description: Bearer {user access token}
         - name: lang
           in: query
           schema:
