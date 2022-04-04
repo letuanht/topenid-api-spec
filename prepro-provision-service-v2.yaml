@@ -435,8 +435,8 @@ paths:
         - Account APIs
       security:
         - bearerAuth: [ ]
-      operationId: addTopenIDAccount
-      summary: add TopenID account
+      operationId: registerTopenIDAccount
+      summary: Register TopenID account
       requestBody:
         content:
           application/json:
@@ -477,7 +477,7 @@ paths:
                             type: string
               examples:
                 create_successful:
-                  summary: Provision a user successfully
+                  summary: Register a user account successfully
                   value:
                     data:
                       ht_id: '2828917688328040'
@@ -513,13 +513,55 @@ paths:
                     code: '202001'
                     status: FAILURE
                     message: username has already existed
-                consent_receipt_null:
-                  summary: Consent receipt null or blank
+                first_name_null:
+                  summary: First name null or blank
                   value:
                     data:
                     code: '200001'
                     status: FAILURE
-                    message: consent_receipt cannot be blank
+                    message: first_name cannot be blank
+                first_name_too_long:
+                  summary: First name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: first_name's length must be less than 256
+                last_name_null:
+                  summary: Last name null or blank
+                  value:
+                    data:
+                    code: '200001'
+                    status: FAILURE
+                    message: last_name cannot be blank
+                last_name_too_long:
+                  summary: Last name too long
+                  value:
+                    data:
+                    code: '200004'
+                    status: FAILURE
+                    message: last_name's length must be less than 256
+                gender_not_in_supported_list:
+                  summary: Gender invalid
+                  value:
+                    data:
+                    code: '200003'
+                    status: FAILURE
+                    message: gender isn't in supported list
+                dob_invalid_format:
+                  summary: Date of birth invalid format
+                  value:
+                    data:
+                    code: '200002'
+                    status: FAILURE
+                    message: Invalid dob format
+                dob_user_under_18:
+                  summary: User under 18
+                  value:
+                    data:
+                    code: '203004'
+                    status: FAILURE
+                    message: Date of birth must be dd/MM/yyyy or earlier
                 invalid_consent_receipt:
                   summary: Invalid consent receipt
                   value:
@@ -552,20 +594,6 @@ paths:
                     message: Access denied
                     code: '203016'
                     status: FAILURE
-        '404':
-          description: Username Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Not Found:
-                  summary: username cannot be found
-                  value:
-                    data:
-                    code: '202007'
-                    status: FAILURE
-                    message: username cannot be found
         '500':
           description: Internal server error.
           content:
@@ -714,7 +742,8 @@ components:
       type: object
       required:
         - password
-        - consent_receipt
+        - first_name
+        - last_name
       properties:
         password:
           type: string
@@ -723,6 +752,25 @@ components:
           description: Password must be between 8 and 30 characters, contain a digit[0-9],
             a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
+        first_name:
+          type: string
+          maxLength: 255
+          example: Thảo Nguyên
+        last_name:
+          type: string
+          maxLength: 255
+          example: Trần
+        gender:
+          type: string
+          example: FEMALE
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+        dob:
+          type: string
+          description: Date of birth. In format dd/MM/yyyy.
+          example: 20/01/1990
         consent_receipt:
           type: array
           description: A list of consent purpose ID
