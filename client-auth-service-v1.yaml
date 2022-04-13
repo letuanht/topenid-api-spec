@@ -14,9 +14,9 @@ paths:
         - Authentication APIs
       security:
         - bearerAuth: [ ]
-      summary: Generate client access token
+      summary: Grant client access token
       description: "The RP use this API to generate client access token."
-      operationId: generateClientToken
+      operationId: grantClientToken
       parameters:
         - name: Client-Token
           in: header
