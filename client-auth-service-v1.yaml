@@ -135,7 +135,7 @@ paths:
                   exp: 1649764800
                   active: true
                   iat: 1649761200
-                message: null
+                message: The request completed successfully
                 status: SUCCESS
         '400':
           description: |
