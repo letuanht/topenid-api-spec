@@ -60,12 +60,12 @@ paths:
         '400':
           description: |
             **Bad Request**
-            | Error Code | Message |
-            | - | - |
-            | 200001 | client_id cannot be blank |
-            | 200001 | client_secret cannot be blank |
-            | 203024 | Missing request header 'Client-Id' for method parameter of type String |
-            | 203024 | Missing request header 'Client-Secret' for method parameter of type String |
+            | Error Code: Message |
+            | -- |
+            | 200001: client_id cannot be blank |
+            | 200001: client_secret cannot be blank |
+            | 203024: Missing request header 'Client-Id' for method parameter of type String |
+            | 203024: Missing request header 'Client-Secret' for method parameter of type String |
           content:
             application/json:
               example:
@@ -78,19 +78,19 @@ paths:
             **Unauthorized**
             | Error Code: Message |
             | -- |
-            | - 203015: Invalid access token |
+            | 203015: Invalid access token |
         '403':
           description: |
             **Forbidden**
             | Error Code: Message |
             | -- |
-            | - 203016: Access denied |
+            | 203016: Access denied |
         '500':
           description: |
             **Internal server error**
             | Error Code: Message |
             | -- |
-            | - 100500: Error detail message |
+            | 100500: Error detail message |
   "/verify-token":
     post:
       tags:
@@ -136,9 +136,9 @@ paths:
         '400':
           description: |
             **Bad Request**
-            | Error Code | Message |
+            | Error Code: Message |
             | - | - |
-            | 200001 | token cannot be blank |
+            | 200001: token cannot be blank |
           content:
             application/json:
               example:
@@ -151,19 +151,19 @@ paths:
             **Unauthorized**
             | Error Code: Message |
             | -- |
-            | - 203015: Invalid access token |
+            | 203015: Invalid access token |
         '403':
           description: |
             **Forbidden**
             | Error Code: Message |
             | -- |
-            | - 203016: Access denied |
+            | 203016: Access denied |
         '500':
           description: |
             **Internal server error**
             | Error Code: Message |
             | -- |
-            | - 100500: Error detail message |
+            | 100500: Error detail message |
 components:
   securitySchemes:
     bearerAuth:
