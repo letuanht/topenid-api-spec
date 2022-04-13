@@ -78,13 +78,7 @@ paths:
             **Unauthorized**
             | Error Code: Message |
             | -- |
-            | 203015: Invalid access token |
-        '403':
-          description: |
-            **Forbidden**
-            | Error Code: Message |
-            | -- |
-            | 203016: Access denied |
+            | 203012: Invalid client credentials |
         '500':
           description: |
             **Internal server error**
@@ -146,18 +140,6 @@ paths:
                 status: FAILURE
                 code: 200001
                 data: null
-        '401':
-          description: |
-            **Unauthorized**
-            | Error Code: Message |
-            | -- |
-            | 203015: Invalid access token |
-        '403':
-          description: |
-            **Forbidden**
-            | Error Code: Message |
-            | -- |
-            | 203016: Access denied |
         '500':
           description: |
             **Internal server error**
