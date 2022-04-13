@@ -64,8 +64,6 @@ paths:
             | -- |
             | 200001: client_id cannot be blank |
             | 200001: client_secret cannot be blank |
-            | 203024: Missing request header 'Client-Id' for method parameter of type String |
-            | 203024: Missing request header 'Client-Secret' for method parameter of type String |
           content:
             application/json:
               example:
