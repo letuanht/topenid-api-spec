@@ -131,7 +131,7 @@ paths:
           description: |
             **Bad Request**
             | Error Code: Message |
-            | - | - |
+            | -- |
             | 200001: token cannot be blank |
           content:
             application/json:
