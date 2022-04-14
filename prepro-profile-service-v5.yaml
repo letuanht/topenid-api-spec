@@ -1671,13 +1671,6 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponseData"
               examples:
-                invalid_token:
-                  summary: invalid token
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203015'
-                    message: Invalid access token
                 profile_not_found:
                   summary: profile not found
                   value:
