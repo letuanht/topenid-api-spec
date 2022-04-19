@@ -41,7 +41,19 @@
       const queryString = window.location.search;
       
       const urlParams = new URLSearchParams(queryString);
-      const service = urlParams.get('service')
+      const service = urlParams.get('service');
+
+      const DisableTryItOutPlugin = function() {
+        return {
+          statePlugins: {
+            spec: {
+              wrapSelectors: {
+                allowTryItOutFor: () => () => false
+              }
+            }
+          }
+        }
+      }
 
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
@@ -53,7 +65,8 @@
           SwaggerUIStandalonePreset
         ],
         plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
+          SwaggerUIBundle.plugins.DownloadUrl,
+          DisableTryItOutPlugin
         ],
         layout: "StandaloneLayout"
       });
