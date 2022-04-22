@@ -1239,180 +1239,180 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-    put:
-      security:
-        - bearerAuth: []
-      tags:
-        - Contact Info APIs
-      operationId: updateBasicInfo
-      summary: Update basic information of user profile
-      description: This API allows to update basic information of user profile
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ProfileBasicInfoUpdateRequest"
-        required: true
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        nullable: true
-                        example:
-              examples:
-                update_successful:
-                  summary: Update Successful
-                  value:
-                    data:
-                    message: The request completed successfully
-                    code:
-                    status: SUCCESS
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                lastname_invalid:
-                  summary: Last name is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: lastname cannot be blank
-                lastname_invalid_length_too_long:
-                  summary: Last name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: last_name's length must be less than 256
-                firstname_invalid:
-                  summary: First & middle name is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: first_name cannot be blank
-                firstname_invalid_length_too_long:
-                  summary: First & middle name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: first_name's length must be less than 256
-                gender_blank:
-                  summary: Gender is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: gender cannot be blank
-                gender_invalid:
-                  summary: Gender invalid
-                  value:
-                    data:
-                    code: '200003'
-                    status: FAILURE
-                    message: gender isn't in supported list
-                dob_blank:
-                  summary: Dob is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: dob cannot be blank
-                dob_invalid:
-                  summary: Dob invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid dob format
-                user_under_18:
-                  summary: User under 18
-                  value:
-                    data:
-                    code: '203004'
-                    status: FAILURE
-                    message: Date of birth must be 15/11/2003 or earlier
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                user_profile_not_found:
-                  summary: User profile not found
-                  value:
-                    data:
-                    code: '101101'
-                    status: FAILURE
-                    message: User profile was not found
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+  #    put:
+  #      security:
+  #        - bearerAuth: []
+  #      tags:
+  #        - Contact Info APIs
+  #      operationId: updateBasicInfo
+  #      summary: Update basic information of user profile
+  #      description: This API allows to update basic information of user profile
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/ProfileBasicInfoUpdateRequest"
+  #        required: true
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        type: object
+  #                        nullable: true
+  #                        example:
+  #              examples:
+  #                update_successful:
+  #                  summary: Update Successful
+  #                  value:
+  #                    data:
+  #                    message: The request completed successfully
+  #                    code:
+  #                    status: SUCCESS
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                lastname_invalid:
+  #                  summary: Last name is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: lastname cannot be blank
+  #                lastname_invalid_length_too_long:
+  #                  summary: Last name too long
+  #                  value:
+  #                    data:
+  #                    code: '200004'
+  #                    status: FAILURE
+  #                    message: last_name's length must be less than 256
+  #                firstname_invalid:
+  #                  summary: First & middle name is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: first_name cannot be blank
+  #                firstname_invalid_length_too_long:
+  #                  summary: First & middle name too long
+  #                  value:
+  #                    data:
+  #                    code: '200004'
+  #                    status: FAILURE
+  #                    message: first_name's length must be less than 256
+  #                gender_blank:
+  #                  summary: Gender is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: gender cannot be blank
+  #                gender_invalid:
+  #                  summary: Gender invalid
+  #                  value:
+  #                    data:
+  #                    code: '200003'
+  #                    status: FAILURE
+  #                    message: gender isn't in supported list
+  #                dob_blank:
+  #                  summary: Dob is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: dob cannot be blank
+  #                dob_invalid:
+  #                  summary: Dob invalid format
+  #                  value:
+  #                    data:
+  #                    code: '200002'
+  #                    status: FAILURE
+  #                    message: Invalid dob format
+  #                user_under_18:
+  #                  summary: User under 18
+  #                  value:
+  #                    data:
+  #                    code: '203004'
+  #                    status: FAILURE
+  #                    message: Date of birth must be 15/11/2003 or earlier
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not Found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                user_profile_not_found:
+  #                  summary: User profile not found
+  #                  value:
+  #                    data:
+  #                    code: '101101'
+  #                    status: FAILURE
+  #                    message: User profile was not found
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
   "/contact-management/contacts":
     get:
       tags:
@@ -1728,275 +1728,275 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-    post:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: addPhoneNumber
-      summary: Add phone number to user profile
-      description: "This API allows to add phone number to user profile. The adding
-        phone flow needs to do 3 steps:\n 1. Verify the phone number. RP calls “Verification
-        API” to request generate OTP. \n 2. Complete verifying OTP. RP calls “Verify
-        OTP API” to verify user’s phone number. User input the received OTP which
-        sent by TopenID. \n 3. Add the verified phone to user profile. RP calls ”API
-        POST/contact-management/phones” to add phone to user profile."
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/AddPhoneNumberRequest"
-        required: true
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        "$ref": "#/components/schemas/ContactPhoneNumberResponse"
-              examples:
-                request completed successfully:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-                      ht_id: '2828917688328040'
-                      phone:
-                        id: '4908094882488354'
-                        value: '0912345678'
-                        primary: false
-                        verified: true
-                        tags:
-                        last_modified_date: 1625454349735
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                verification_id_blank:
-                  summary: Verification_id null or blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: verification_id cannot be blank
-                verification_id_incorrect:
-                  summary: Verification_id incorrect
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202004'
-                    message: Incorrect verification
-                verification_id_not_belong_to_client:
-                  summary: Verification does not belong to Client
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202002'
-                    message: verification_id cannot be found
-                phone_blank:
-                  summary: Phone null or blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: phone cannot be blank
-                phone_invalid_format:
-                  summary: Invalid  phone format
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200002'
-                    message: Invalid phone format
-                phone_existed:
-                  summary: Phone already exists
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202001'
-                    message: phone has already existed
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/phones/{phone_id}":
-    delete:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: deleteContactPhone
-      summary: Delete phone of the profile
-      description: Delete phone of the profile
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: phone_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data: {}
-              examples:
-                default:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                phone_id cannot be blank:
-                  summary: phone_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: phone_id cannot be blank
-                phone_is_primary_contact:
-                  summary: cannot delete a primary contact
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202005'
-                    message: Cannot delete a primary contact
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: phone_id cannot be found
-                code: '202007'
-                status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+  #    post:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: addPhoneNumber
+  #      summary: Add phone number to user profile
+  #      description: "This API allows to add phone number to user profile. The adding
+  #        phone flow needs to do 3 steps:\n 1. Verify the phone number. RP calls “Verification
+  #        API” to request generate OTP. \n 2. Complete verifying OTP. RP calls “Verify
+  #        OTP API” to verify user’s phone number. User input the received OTP which
+  #        sent by TopenID. \n 3. Add the verified phone to user profile. RP calls ”API
+  #        POST/contact-management/phones” to add phone to user profile."
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/AddPhoneNumberRequest"
+  #        required: true
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #      responses:
+  #        '201':
+  #          description: Created
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        "$ref": "#/components/schemas/ContactPhoneNumberResponse"
+  #              examples:
+  #                request completed successfully:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #                      ht_id: '2828917688328040'
+  #                      phone:
+  #                        id: '4908094882488354'
+  #                        value: '0912345678'
+  #                        primary: false
+  #                        verified: true
+  #                        tags:
+  #                        last_modified_date: 1625454349735
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                verification_id_blank:
+  #                  summary: Verification_id null or blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: verification_id cannot be blank
+  #                verification_id_incorrect:
+  #                  summary: Verification_id incorrect
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202004'
+  #                    message: Incorrect verification
+  #                verification_id_not_belong_to_client:
+  #                  summary: Verification does not belong to Client
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202002'
+  #                    message: verification_id cannot be found
+  #                phone_blank:
+  #                  summary: Phone null or blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: phone cannot be blank
+  #                phone_invalid_format:
+  #                  summary: Invalid  phone format
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200002'
+  #                    message: Invalid phone format
+  #                phone_existed:
+  #                  summary: Phone already exists
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202001'
+  #                    message: phone has already existed
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/phones/{phone_id}":
+  #    delete:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: deleteContactPhone
+  #      summary: Delete phone of the profile
+  #      description: Delete phone of the profile
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: phone_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data: {}
+  #              examples:
+  #                default:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                phone_id cannot be blank:
+  #                  summary: phone_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: phone_id cannot be blank
+  #                phone_is_primary_contact:
+  #                  summary: cannot delete a primary contact
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202005'
+  #                    message: Cannot delete a primary contact
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not Found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: phone_id cannot be found
+  #                code: '202007'
+  #                status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
   "/contact-management/emails":
     get:
       tags:
@@ -2088,537 +2088,537 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-    post:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: addContactEmail
-      summary: Add an email address to user profile
-      description: This API allows to add an email address to user profile with the
-        unverified status.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ContactEmailAddingRequest"
-        required: true
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        "$ref": "#/components/schemas/ContactEmailAddingResponse"
-              examples:
-                default:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    data:
-                      ht_id: '2828917688328040'
-                      email:
-                        id: string
-                        primary: false
-                        verified: false
-                        tags:
-                        value: string
-                        last_modified_date: 1625454349735
-                    status: SUCCESS
-                    code:
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                email_blank:
-                  summary: email cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: email cannot be blank
-                invalid_email:
-                  summary: email has invalid format
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200002'
-                    message: Invalid email format
-                email_existed:
-                  summary: email existed
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202001'
-                    message: email has already existed
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/emails/{email_id}/verify":
-    put:
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: email_id
-          in: path
-          required: true
-          schema:
-            type: string
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: verifyContactEmail
-      summary: Verify an email address
-      description: "This API allows to verify an email address to user profile. The
-        email verifying flow needs to do 3 steps:\n 1. Verify the email address with
-        OTP. RP calls “Verification API” to request generate OTP and deliver OTP to
-        the requested email adding. \n 2. Complete verifying OTP. RP calls “Verify
-        OTP API” to verify user’s phone number. User input the received OTP which
-        sent by TopenID. \n 3. Perform verifying email address. RP calls “API PUT/contact-management/emails/{email_id}/verify”
-        to verify email address."
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ContactEmailVerificationRequest"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        "$ref": "#/components/schemas/ContactEmailVerificationResponse"
-              examples:
-                default:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    data:
-                      ht_id: '2828917688328040'
-                      email:
-                        id: string
-                        primary: false
-                        verified: true
-                        tags:
-                        value: string
-                        last_modified_date: 1625454349735
-                    status: SUCCESS
-                    code:
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                verification_id_blank:
-                  summary: verification_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: verification_id cannot be blank
-                invalid_email:
-                  summary: email_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: email_id cannot be blank
-                incorrect_verification.:
-                  summary: Incorrect verification
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202004'
-                    message: Incorrect verification
-                email_already_verified:
-                  summary: email has already been verified
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203009'
-                    message: The email has already been verified
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Not Found:
-                  summary: email_id cannot be found
-                  value:
-                    data:
-                    code: '202007'
-                    status: FAILURE
-                    message: email_id cannot be found
-                email_id_is_empty:
-                  summary: email_id is empty
-                  value:
-                    data:
-                    code: '200007'
-                    status: FAILURE
-                    message: The requested resource cannot be found
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/emails/{email_id}/set-primary":
-    put:
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: email_id
-          in: path
-          required: true
-          schema:
-            type: string
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: setPrimaryEmail
-      summary: Set primary email of user profile
-      description: This API allows to set primary email of user profile
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data: {}
-              examples:
-                set_primary_email_successful:
-                  summary: Set primary email successful
-                  value:
-                    data:
-                    message: The request completed successfully
-                    code:
-                    status: SUCCESS
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                email_id_blank:
-                  summary: email_id is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: email_id cannot be blank
-                email_has_been_used_as_primary:
-                  summary: Email is primary of another account
-                  value:
-                    data:
-                    code: '202006'
-                    status: FAILURE
-                    message: email has been set as the primary contact of another
-                      account
-                email_unverified:
-                  summary: Email is unverified
-                  value:
-                    data:
-                    code: '203003'
-                    status: FAILURE
-                    message: Cannot set primary for an unverified email
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Not Found:
-                  summary: Email id does not belong to user
-                  value:
-                    data:
-                    code: '202007'
-                    status: FAILURE
-                    message: email_id cannot be found
-                email_id_is_empty:
-                  summary: email_id is empty
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200007'
-                    message: The requested resource cannot be found
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/emails/{email_id}":
-    delete:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: deleteContactEmail
-      summary: Delete email of user profile
-      description: This API allows to delete email of user profile
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: email_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data: {}
-              examples:
-                default:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                email_id cannot be blank:
-                  summary: email_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: email_id cannot be blank
-                email_is_primary_contact:
-                  summary: cannot delete a primary contact
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202005'
-                    message: Cannot delete a primary contact
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: email_id cannot be found
-                code: '202007'
-                status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+  #    post:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: addContactEmail
+  #      summary: Add an email address to user profile
+  #      description: This API allows to add an email address to user profile with the
+  #        unverified status.
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/ContactEmailAddingRequest"
+  #        required: true
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #      responses:
+  #        '201':
+  #          description: Created
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        "$ref": "#/components/schemas/ContactEmailAddingResponse"
+  #              examples:
+  #                default:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    data:
+  #                      ht_id: '2828917688328040'
+  #                      email:
+  #                        id: string
+  #                        primary: false
+  #                        verified: false
+  #                        tags:
+  #                        value: string
+  #                        last_modified_date: 1625454349735
+  #                    status: SUCCESS
+  #                    code:
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                email_blank:
+  #                  summary: email cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: email cannot be blank
+  #                invalid_email:
+  #                  summary: email has invalid format
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200002'
+  #                    message: Invalid email format
+  #                email_existed:
+  #                  summary: email existed
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202001'
+  #                    message: email has already existed
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/emails/{email_id}/verify":
+  #    put:
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: email_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: verifyContactEmail
+  #      summary: Verify an email address
+  #      description: "This API allows to verify an email address to user profile. The
+  #        email verifying flow needs to do 3 steps:\n 1. Verify the email address with
+  #        OTP. RP calls “Verification API” to request generate OTP and deliver OTP to
+  #        the requested email adding. \n 2. Complete verifying OTP. RP calls “Verify
+  #        OTP API” to verify user’s phone number. User input the received OTP which
+  #        sent by TopenID. \n 3. Perform verifying email address. RP calls “API PUT/contact-management/emails/{email_id}/verify”
+  #        to verify email address."
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/ContactEmailVerificationRequest"
+  #        required: true
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        "$ref": "#/components/schemas/ContactEmailVerificationResponse"
+  #              examples:
+  #                default:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    data:
+  #                      ht_id: '2828917688328040'
+  #                      email:
+  #                        id: string
+  #                        primary: false
+  #                        verified: true
+  #                        tags:
+  #                        value: string
+  #                        last_modified_date: 1625454349735
+  #                    status: SUCCESS
+  #                    code:
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                verification_id_blank:
+  #                  summary: verification_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: verification_id cannot be blank
+  #                invalid_email:
+  #                  summary: email_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: email_id cannot be blank
+  #                incorrect_verification.:
+  #                  summary: Incorrect verification
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202004'
+  #                    message: Incorrect verification
+  #                email_already_verified:
+  #                  summary: email has already been verified
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203009'
+  #                    message: The email has already been verified
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Not Found:
+  #                  summary: email_id cannot be found
+  #                  value:
+  #                    data:
+  #                    code: '202007'
+  #                    status: FAILURE
+  #                    message: email_id cannot be found
+  #                email_id_is_empty:
+  #                  summary: email_id is empty
+  #                  value:
+  #                    data:
+  #                    code: '200007'
+  #                    status: FAILURE
+  #                    message: The requested resource cannot be found
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/emails/{email_id}/set-primary":
+  #    put:
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: email_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: setPrimaryEmail
+  #      summary: Set primary email of user profile
+  #      description: This API allows to set primary email of user profile
+  #      responses:
+  #        '200':
+  #          description: Ok
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data: {}
+  #              examples:
+  #                set_primary_email_successful:
+  #                  summary: Set primary email successful
+  #                  value:
+  #                    data:
+  #                    message: The request completed successfully
+  #                    code:
+  #                    status: SUCCESS
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                email_id_blank:
+  #                  summary: email_id is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: email_id cannot be blank
+  #                email_has_been_used_as_primary:
+  #                  summary: Email is primary of another account
+  #                  value:
+  #                    data:
+  #                    code: '202006'
+  #                    status: FAILURE
+  #                    message: email has been set as the primary contact of another
+  #                      account
+  #                email_unverified:
+  #                  summary: Email is unverified
+  #                  value:
+  #                    data:
+  #                    code: '203003'
+  #                    status: FAILURE
+  #                    message: Cannot set primary for an unverified email
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not Found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Not Found:
+  #                  summary: Email id does not belong to user
+  #                  value:
+  #                    data:
+  #                    code: '202007'
+  #                    status: FAILURE
+  #                    message: email_id cannot be found
+  #                email_id_is_empty:
+  #                  summary: email_id is empty
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200007'
+  #                    message: The requested resource cannot be found
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/emails/{email_id}":
+  #    delete:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: deleteContactEmail
+  #      summary: Delete email of user profile
+  #      description: This API allows to delete email of user profile
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: email_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data: {}
+  #              examples:
+  #                default:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                email_id cannot be blank:
+  #                  summary: email_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: email_id cannot be blank
+  #                email_is_primary_contact:
+  #                  summary: cannot delete a primary contact
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202005'
+  #                    message: Cannot delete a primary contact
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not Found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: email_id cannot be found
+  #                code: '202007'
+  #                status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
   "/contact-management/addresses":
     get:
       tags:
@@ -2717,606 +2717,606 @@ paths:
                 code: '100500'
                 status: FAILURE
                 message: Error detail message
-    post:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: addContactAddress
-      summary: Add resident address to user profile
-      description: This API allow to add resident address to user profile
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ContactAddressAddingRequest"
-        required: true
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        "$ref": "#/components/schemas/ContactAddressResponse"
-              examples:
-                default:
-                  summary: Add address successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-                      ht_id: '2828917688328040'
-                      address:
-                        id: string
-                        value: string
-                        other: string
-                        ward_code: string
-                        ward: string
-                        district_code: string
-                        district: string
-                        city_code: string
-                        city: string
-                        primary: true
-                        verified: false
-                        tags:
-                        last_modified_date: 1625454349735
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                detail_address_blank:
-                  summary: detail_address cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: detail_address cannot be blank
-                detail_address_over_max_length:
-                  summary: detail_address cannot over max length
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200004'
-                    message: detail_address's length must be less than 256
-                ward_code_blank:
-                  summary: ward_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: ward_code cannot be blank
-                district_code_blank:
-                  summary: district_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: district_code cannot be blank
-                city_code_blank:
-                  summary: city_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: city_code cannot be blank
-                city_code_can_not_found:
-                  summary: city_code cannot be found
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203005'
-                    message: Province/City Code <city_code> cannot be found
-                ward_code_district_code_not_matched:
-                  summary: ward_code and district_code not matched
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203006'
-                    message: Ward Code <ward_code> and District Code <district_code>
-                      were not matched
-                district_code_city_code_not_matched:
-                  summary: district_code and city_code not found matched
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203007'
-                    message: District Code <district_code> and Province/City Code
-                      <city_code> were not matched
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/addresses/{address_id}/set-primary":
-    put:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: setPrimaryAddress
-      summary: Set primary address of user profile
-      description: This API allows to set primary address of user profile
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: address_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data: {}
-              examples:
-                set_primary_email_successful:
-                  summary: Set primary address successful
-                  value:
-                    data:
-                    message: The request completed successfully
-                    code:
-                    status: SUCCESS
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                contact_id_blank:
-                  summary: address_id is blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: address_id cannot be blank
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Not found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Not Found:
-                  summary: address_id cannot be found
-                  value:
-                    data:
-                    code: '202007'
-                    status: FAILURE
-                    message: address_id cannot be found
-                address_id_is_empty:
-                  summary: address_id is empty
-                  value:
-                    data:
-                    code: '200007'
-                    status: FAILURE
-                    message: The requested resource cannot be found
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-  "/contact-management/addresses/{address_id}":
-    put:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: updateContactAddress
-      summary: Update address of user profile
-      description: This API allow to update address of user profile
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: address_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/ContactAddressUpdateRequest"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data:
-                        "$ref": "#/components/schemas/ContactAddressResponse"
-              examples:
-                default:
-                  summary: Update address successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-                      ht_id: '2828917688328040'
-                      address:
-                        id: string
-                        value: string
-                        other: string
-                        ward_code: string
-                        ward: string
-                        district_code: string
-                        district: string
-                        city_code: string
-                        city: string
-                        primary: true
-                        verified: false
-                        tags:
-                        last_modified_date: 1625454349735
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                id_blank:
-                  summary: address_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: address_id cannot be blank
-                detail_address_blank:
-                  summary: detail_address cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: detail_address cannot be blank
-                detail_address_over_max_length:
-                  summary: detail_address cannot over max length
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200004'
-                    message: detail_address's length must be less than 256
-                ward_code_blank:
-                  summary: ward_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: ward_code cannot be blank
-                district_code_blank:
-                  summary: district_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: district_code cannot be blank
-                city_code_blank:
-                  summary: city_code cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: city_code cannot be blank
-                city_code_can_not_found:
-                  summary: city_code cannot be found
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203005'
-                    message: Province/City Code <city_code> cannot be found
-                ward_code_district_code_not_matched:
-                  summary: ward_code and district_code not matched
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203006'
-                    message: Ward Code <ward_code> and District Code <district_code>
-                      were not matched
-                district_code_city_code_not_matched:
-                  summary: district_code and city_code not found matched
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '203007'
-                    message: District Code <district_code> and Province/City Code
-                      <city_code> were not matched
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Address id does not belong to user
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: address_id cannot be found
-                code: '202007'
-                status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
-    delete:
-      tags:
-        - Contact Info APIs
-      security:
-        - bearerAuth: []
-      operationId: deleteContactAddress
-      summary: Delete address of user profile
-      description: This API allows to delete address of user profile
-      parameters:
-        - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {user access token}
-        - name: lang
-          in: query
-          schema:
-            type: string
-          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-        - name: address_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - "$ref": "#/components/schemas/ResponseData"
-                  - type: object
-                    properties:
-                      data: {}
-              examples:
-                default:
-                  summary: The request completed successfully
-                  value:
-                    message: The request completed successfully
-                    status: SUCCESS
-                    code:
-                    data:
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                contact_id cannot be blank:
-                  summary: address_id cannot be blank
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '200001'
-                    message: address_id cannot be blank
-                contact_is_primary_contact:
-                  summary: cannot delete a primary contact
-                  value:
-                    data:
-                    status: FAILURE
-                    code: '202005'
-                    message: Cannot delete a primary contact
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
-        '404':
-          description: Address id does not belong to user
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: address_id cannot be found
-                code: '202007'
-                status: FAILURE
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+  #    post:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: addContactAddress
+  #      summary: Add resident address to user profile
+  #      description: This API allow to add resident address to user profile
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/ContactAddressAddingRequest"
+  #        required: true
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #      responses:
+  #        '201':
+  #          description: Created
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        "$ref": "#/components/schemas/ContactAddressResponse"
+  #              examples:
+  #                default:
+  #                  summary: Add address successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #                      ht_id: '2828917688328040'
+  #                      address:
+  #                        id: string
+  #                        value: string
+  #                        other: string
+  #                        ward_code: string
+  #                        ward: string
+  #                        district_code: string
+  #                        district: string
+  #                        city_code: string
+  #                        city: string
+  #                        primary: true
+  #                        verified: false
+  #                        tags:
+  #                        last_modified_date: 1625454349735
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                detail_address_blank:
+  #                  summary: detail_address cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: detail_address cannot be blank
+  #                detail_address_over_max_length:
+  #                  summary: detail_address cannot over max length
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200004'
+  #                    message: detail_address's length must be less than 256
+  #                ward_code_blank:
+  #                  summary: ward_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: ward_code cannot be blank
+  #                district_code_blank:
+  #                  summary: district_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: district_code cannot be blank
+  #                city_code_blank:
+  #                  summary: city_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: city_code cannot be blank
+  #                city_code_can_not_found:
+  #                  summary: city_code cannot be found
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203005'
+  #                    message: Province/City Code <city_code> cannot be found
+  #                ward_code_district_code_not_matched:
+  #                  summary: ward_code and district_code not matched
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203006'
+  #                    message: Ward Code <ward_code> and District Code <district_code>
+  #                      were not matched
+  #                district_code_city_code_not_matched:
+  #                  summary: district_code and city_code not found matched
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203007'
+  #                    message: District Code <district_code> and Province/City Code
+  #                      <city_code> were not matched
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/addresses/{address_id}/set-primary":
+  #    put:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: setPrimaryAddress
+  #      summary: Set primary address of user profile
+  #      description: This API allows to set primary address of user profile
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: address_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      responses:
+  #        '200':
+  #          description: Ok
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data: {}
+  #              examples:
+  #                set_primary_email_successful:
+  #                  summary: Set primary address successful
+  #                  value:
+  #                    data:
+  #                    message: The request completed successfully
+  #                    code:
+  #                    status: SUCCESS
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                contact_id_blank:
+  #                  summary: address_id is blank
+  #                  value:
+  #                    data:
+  #                    code: '200001'
+  #                    status: FAILURE
+  #                    message: address_id cannot be blank
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Not found
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Not Found:
+  #                  summary: address_id cannot be found
+  #                  value:
+  #                    data:
+  #                    code: '202007'
+  #                    status: FAILURE
+  #                    message: address_id cannot be found
+  #                address_id_is_empty:
+  #                  summary: address_id is empty
+  #                  value:
+  #                    data:
+  #                    code: '200007'
+  #                    status: FAILURE
+  #                    message: The requested resource cannot be found
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #  "/contact-management/addresses/{address_id}":
+  #    put:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: updateContactAddress
+  #      summary: Update address of user profile
+  #      description: This API allow to update address of user profile
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: address_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      requestBody:
+  #        content:
+  #          application/json:
+  #            schema:
+  #              "$ref": "#/components/schemas/ContactAddressUpdateRequest"
+  #        required: true
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data:
+  #                        "$ref": "#/components/schemas/ContactAddressResponse"
+  #              examples:
+  #                default:
+  #                  summary: Update address successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #                      ht_id: '2828917688328040'
+  #                      address:
+  #                        id: string
+  #                        value: string
+  #                        other: string
+  #                        ward_code: string
+  #                        ward: string
+  #                        district_code: string
+  #                        district: string
+  #                        city_code: string
+  #                        city: string
+  #                        primary: true
+  #                        verified: false
+  #                        tags:
+  #                        last_modified_date: 1625454349735
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                id_blank:
+  #                  summary: address_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: address_id cannot be blank
+  #                detail_address_blank:
+  #                  summary: detail_address cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: detail_address cannot be blank
+  #                detail_address_over_max_length:
+  #                  summary: detail_address cannot over max length
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200004'
+  #                    message: detail_address's length must be less than 256
+  #                ward_code_blank:
+  #                  summary: ward_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: ward_code cannot be blank
+  #                district_code_blank:
+  #                  summary: district_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: district_code cannot be blank
+  #                city_code_blank:
+  #                  summary: city_code cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: city_code cannot be blank
+  #                city_code_can_not_found:
+  #                  summary: city_code cannot be found
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203005'
+  #                    message: Province/City Code <city_code> cannot be found
+  #                ward_code_district_code_not_matched:
+  #                  summary: ward_code and district_code not matched
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203006'
+  #                    message: Ward Code <ward_code> and District Code <district_code>
+  #                      were not matched
+  #                district_code_city_code_not_matched:
+  #                  summary: district_code and city_code not found matched
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '203007'
+  #                    message: District Code <district_code> and Province/City Code
+  #                      <city_code> were not matched
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Address id does not belong to user
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: address_id cannot be found
+  #                code: '202007'
+  #                status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
+  #    delete:
+  #      tags:
+  #        - Contact Info APIs
+  #      security:
+  #        - bearerAuth: []
+  #      operationId: deleteContactAddress
+  #      summary: Delete address of user profile
+  #      description: This API allows to delete address of user profile
+  #      parameters:
+  #        - name: Client-Token
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {client access token}
+  #        - name: Authorization
+  #          in: header
+  #          required: true
+  #          schema:
+  #            type: string
+  #          description: Bearer {user access token}
+  #        - name: lang
+  #          in: query
+  #          schema:
+  #            type: string
+  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+  #        - name: address_id
+  #          in: path
+  #          required: true
+  #          schema:
+  #            type: string
+  #      responses:
+  #        '200':
+  #          description: OK
+  #          content:
+  #            application/json:
+  #              schema:
+  #                allOf:
+  #                  - "$ref": "#/components/schemas/ResponseData"
+  #                  - type: object
+  #                    properties:
+  #                      data: {}
+  #              examples:
+  #                default:
+  #                  summary: The request completed successfully
+  #                  value:
+  #                    message: The request completed successfully
+  #                    status: SUCCESS
+  #                    code:
+  #                    data:
+  #        '400':
+  #          description: Bad Request
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                contact_id cannot be blank:
+  #                  summary: address_id cannot be blank
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '200001'
+  #                    message: address_id cannot be blank
+  #                contact_is_primary_contact:
+  #                  summary: cannot delete a primary contact
+  #                  value:
+  #                    data:
+  #                    status: FAILURE
+  #                    code: '202005'
+  #                    message: Cannot delete a primary contact
+  #        '401':
+  #          description: Unauthorized
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: Invalid access token
+  #                code: '203015'
+  #                status: FAILURE
+  #        '403':
+  #          description: Forbidden
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              examples:
+  #                Access denied:
+  #                  summary: Access denied
+  #                  value:
+  #                    data:
+  #                    message: Access denied
+  #                    code: '203016'
+  #                    status: FAILURE
+  #        '404':
+  #          description: Address id does not belong to user
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                message: address_id cannot be found
+  #                code: '202007'
+  #                status: FAILURE
+  #        '500':
+  #          description: Internal server error.
+  #          content:
+  #            application/json:
+  #              schema:
+  #                "$ref": "#/components/schemas/ErrorResponseData"
+  #              example:
+  #                data:
+  #                code: '100500'
+  #                status: FAILURE
+  #                message: Error detail message
   "/topen-info/terms":
     get:
       tags:
