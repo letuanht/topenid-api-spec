@@ -1,0 +1,248 @@
+openapi: 3.0.1
+info:
+  title: Client Auth service
+  version: v1
+servers:
+  - url: Please follow the release note for further information
+tags:
+  - name: Authentication APIs
+    description: Group of APIs to get client token and validate token
+paths:
+  "/grant-token":
+    post:
+      tags:
+        - Authentication APIs
+      security:
+        - bearerAuth: [ ]
+      summary: Grant client access token
+      description: "The RP use this API to generate client access token."
+      operationId: grantClientToken
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/GrantTokenRequest"
+        required: true
+      responses:
+        '201':
+          description: CREATED
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        "$ref": "#/components/schemas/ClientTokenResponse"
+              examples:
+                client_access_token:
+                  summary: client access token
+                  value:
+                    message: The request completed successfully
+                    status: SUCCESS
+                    code: null
+                    data:
+                      access_token: eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hO...
+                      expires_in: 3600
+        '400':
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 200001: client_id cannot be blank |
+            | 200001: client_secret cannot be blank |
+          content:
+            application/json:
+              example:
+                message: client_id cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 203012: Invalid client credentials |
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
+  "/verify-token":
+    post:
+      tags:
+        - Authentication APIs
+      security:
+        - bearerAuth: [ ]
+      summary: Validate an access token
+      description: This API is used to validate an access_token whether it is valid or not.
+      operationId: verifyToken
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/VerifyTokenRequest"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/IntrospectResponse"
+              example:
+                code: null
+                data:
+                  exp: 1649764800
+                  active: true
+                  iat: 1649761200
+                message: The request completed successfully
+                status: SUCCESS
+        '400':
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 200001: token cannot be blank |
+          content:
+            application/json:
+              example:
+                message: token cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ResponseData:
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: true
+          example: null
+        status:
+          type: string
+          example: SUCCESS
+          enum:
+            - SUCCESS
+            - FAILURE
+        code:
+          type: string
+          nullable: true
+          example: null
+    GrantTokenRequest:
+      type: object
+      required:
+        - client_id
+        - client_secret
+      properties:
+        client_id:
+          type: string
+          example: lYi3ivEIfl5...
+          description: client id
+        client_secret:
+          type: string
+          example: uytfKG7879ads...
+          description: client secret
+    VerifyTokenRequest:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          example: dat
+          description: client access token
+    IntrospectResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: object
+          properties:
+            exp:
+              type: integer
+              format: int32
+              nullable: true
+            active:
+              type: boolean
+            iat:
+              type: integer
+              format: int32
+              nullable: true
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - SUCCESS
+            - FAILURE
+      title: Response
+    ClientTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+      title: Response
+    ErrorResponseData:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+          example:
+          description: Data is null when we got an error.
+        message:
+          type: string
+          description: Information detail of status
+          example: Internal server error
+        status:
+          type: string
+          enum:
+            - FAILURE
+        code:
+          type: string
+          description: TBD, error code of detail error
+          example: '100500'
