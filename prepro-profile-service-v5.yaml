@@ -785,7 +785,7 @@ paths:
                       - id: 6127092044a4750a8bd857ba
                         name: Thông tin tài khoản
                         description: Truy xuất thông tin tài khoản TopenID
-                        consented_date: '1625454349735'
+                        consented_date: 1625454349735
         '400':
           description: Bad Request
           content:
