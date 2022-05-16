@@ -77,6 +77,8 @@ paths:
             | Error Code: Message |
             | -- |
             | 203012: Invalid client credentials |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
         '500':
           description: |
             **Internal server error**
@@ -138,6 +140,13 @@ paths:
                 status: FAILURE
                 code: 200001
                 data: null
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
         '500':
           description: |
             **Internal server error**
