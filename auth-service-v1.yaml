@@ -1467,7 +1467,11 @@ components:
         token:
           type: string
           example: dat
-          description: user access token or TopenX user access token
+          description: |
+            Supported tokens:
+            1. User access token
+            2. TopenX user access token
+            3. Client access token from grant-token API
     IntrospectResponse:
       type: object
       required:
