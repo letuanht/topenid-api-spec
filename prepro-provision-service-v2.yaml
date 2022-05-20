@@ -11,8 +11,6 @@ paths:
     post:
       tags:
         - Account APIs
-      security:
-        - bearerAuth: [ ]
       operationId: createTopenIDAccount
       summary: Provision a user
       requestBody:
@@ -23,12 +21,6 @@ paths:
         required: true
       parameters:
         - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
           in: header
           required: true
           schema:
@@ -56,183 +48,56 @@ paths:
                 create_successful:
                   summary: Provision a user successfully
                   value:
-                    data:
+                    data: null
                     message: The request completed successfully
-                    code:
+                    code: null
                     status: SUCCESS
         '400':
-          description: Bad Request
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 200001: username cannot be blank |
+            | 200002: Invalid username format |
+            | 202001: username has already existed |
+            | 200001: password cannot be blank |
+            | 200010: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z] |
+            | 200001: first_name cannot be blank |
+            | 200004: first_name's length must be less than 256 |
+            | 200001: last_name cannot be blank |
+            | 200004: last_name's length must be less than 256 |
+            | 200003: gender isn't in supported list |
+            | 200002: Invalid dob format |
+            | 203004: Date of birth must be dd/MM/yyyy or earlier |
+            | 200002: Invalid contact_phone format |
+            | 203037: The contact phone has been duplicated with the primary phone |
+            | 200002: Invalid email format |
+            | 200002: Invalid email_verified format |
+            | 203022: Invalid consent receipt |
           content:
             application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                username_null:
-                  summary: Username id null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: username cannot be blank
-                username_invalid_format:
-                  summary: Invalid username format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid username format
-                username_has_existed:
-                  summary: username has already existed
-                  value:
-                    data:
-                    code: '202001'
-                    status: FAILURE
-                    message: username has already existed
-                password_null:
-                  summary: Password null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: password cannot be blank
-                password_invalid_format:
-                  summary: Invalid password format
-                  value:
-                    data:
-                    code: '200010'
-                    status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain
-                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
-                first_name_null:
-                  summary: First name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: first_name cannot be blank
-                first_name_too_long:
-                  summary: First name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: first_name's length must be less than 256
-                last_name_null:
-                  summary: Last name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: last_name cannot be blank
-                last_name_too_long:
-                  summary: Last name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: last_name's length must be less than 256
-                gender_not_in_supported_list:
-                  summary: Gender invalid
-                  value:
-                    data:
-                    code: '200003'
-                    status: FAILURE
-                    message: gender isn't in supported list
-                dob_invalid_format:
-                  summary: Date of birth invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid dob format
-                dob_user_under_18:
-                  summary: User under 18
-                  value:
-                    data:
-                    code: '203004'
-                    status: FAILURE
-                    message: Date of birth must be dd/MM/yyyy or earlier
-                contact_phone_invalid_format:
-                  summary: Invalid contact phone format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid contact_phone format
-                contact_phone_duplicated_with_primary:
-                  summary: The contact phone has been duplicated with the primary phone
-                  value:
-                    data:
-                    code: '203037'
-                    status: FAILURE
-                    message: The contact phone has been duplicated with the primary phone
-                email_invalid_format:
-                  summary: Invalid email format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid email format
-                email_verified_invalid_format:
-                  summary: Email verified invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid email_verified format
-                invalid_consent_receipt:
-                  summary: Invalid consent receipt
-                  value:
-                    data:
-                    code: '203022'
-                    status: FAILURE
-                    message: Invalid consent receipt
+              example:
+                message: username cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
         '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
   "/accounts/{username}":
     put:
       parameters:
         - name: Client-Token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: Bearer {client access token}
-        - name: Authorization
           in: header
           required: true
           schema:
@@ -250,8 +115,6 @@ paths:
             type: string
       tags:
         - Account APIs
-      security:
-        - bearerAuth: [ ]
       operationId: updateTopenIDAccount
       summary: Update RP profile
       requestBody:
@@ -277,158 +140,54 @@ paths:
                 update_successful:
                   summary: Update RP profile successfully
                   value:
-                    data:
+                    data: null
                     message: The request completed successfully
-                    code:
+                    code: null
                     status: SUCCESS
         '400':
-          description: Bad Request
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 200001: username cannot be blank |
+            | 200001: first_name cannot be blank |
+            | 200004: first_name's length must be less than 256 |
+            | 200001: last_name cannot be blank |
+            | 200004: last_name's length must be less than 256 |
+            | 200003: gender isn't in supported list |
+            | 200002: Invalid dob format |
+            | 203004: Date of birth must be dd/MM/yyyy or earlier |
+            | 200002: Invalid contact_phone format |
+            | 203037: The contact phone has been duplicated with the primary phone |
+            | 200002: Invalid email format |
+            | 200002: Invalid email_verified format |
+            | 203038: The account cannot be updated |
           content:
             application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                username_null:
-                  summary: Username id null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: username cannot be blank
-                first_name_null:
-                  summary: First name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: first_name cannot be blank
-                first_name_too_long:
-                  summary: First name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: first_name's length must be less than 256
-                last_name_null:
-                  summary: Last name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: last_name cannot be blank
-                last_name_too_long:
-                  summary: Last name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: last_name's length must be less than 256
-                gender_not_in_supported_list:
-                  summary: Gender invalid
-                  value:
-                    data:
-                    code: '200003'
-                    status: FAILURE
-                    message: gender isn't in supported list
-                dob_invalid_format:
-                  summary: Date of birth invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid dob format
-                dob_user_under_18:
-                  summary: User under 18
-                  value:
-                    data:
-                    code: '203004'
-                    status: FAILURE
-                    message: Date of birth must be dd/MM/yyyy or earlier
-                contact_phone_invalid_format:
-                  summary: Invalid contact phone format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid contact_phone format
-                contact_phone_duplicated_with_primary:
-                  summary: The contact phone has been duplicated with the primary phone
-                  value:
-                    data:
-                    code: '203037'
-                    status: FAILURE
-                    message: The contact phone has been duplicated with the primary phone
-                email_invalid_format:
-                  summary: Invalid email format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid email format
-                email_verified_invalid_format:
-                  summary: Email verified invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid email_verified format
-                account_cannot_be_update:
-                  summary: The account cannot be updated
-                  value:
-                    data:
-                    code: '203038'
-                    status: FAILURE
-                    message: The account cannot be updated
+              example:
+                message: username cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
         '404':
-          description: Username Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Not Found:
-                  summary: username cannot be found
-                  value:
-                    data:
-                    code: '202007'
-                    status: FAILURE
-                    message: username cannot be found
+          description: |
+            **Not Found**
+            | Error Code: Message |
+            | -- |
+            | 202007: username cannot be found |
         '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
   "/accounts/add":
     post:
       tags:
@@ -481,130 +240,50 @@ paths:
                   value:
                     data:
                       ht_id: '2828917688328040'
-                    message: The request completed successfully
-                    code:
+                    message: "The request completed successfully"
+                    code: null
                     status: SUCCESS
         '400':
-          description: Bad Request
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 202001: username has already existed |
+            | 200001: password cannot be blank |
+            | 200010: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z] |
+            | 200001: first_name cannot be blank |
+            | 200004: first_name's length must be less than 256 |
+            | 200001: last_name cannot be blank |
+            | 200004: last_name's length must be less than 256 |
+            | 200003: gender isn't in supported list |
+            | 200002: Invalid dob format |
+            | 203004: Date of birth must be dd/MM/yyyy or earlier |
+            | 203022: Invalid consent receipt |
           content:
             application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                password_null:
-                  summary: Password null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: password cannot be blank
-                password_invalid_format:
-                  summary: Invalid password format
-                  value:
-                    data:
-                    code: '200010'
-                    status: FAILURE
-                    message: Password must be between 8 and 30 characters, contain
-                      a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z]
-                username_has_existed:
-                  summary: Username has already existed
-                  value:
-                    data:
-                    code: '202001'
-                    status: FAILURE
-                    message: username has already existed
-                first_name_null:
-                  summary: First name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: first_name cannot be blank
-                first_name_too_long:
-                  summary: First name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: first_name's length must be less than 256
-                last_name_null:
-                  summary: Last name null or blank
-                  value:
-                    data:
-                    code: '200001'
-                    status: FAILURE
-                    message: last_name cannot be blank
-                last_name_too_long:
-                  summary: Last name too long
-                  value:
-                    data:
-                    code: '200004'
-                    status: FAILURE
-                    message: last_name's length must be less than 256
-                gender_not_in_supported_list:
-                  summary: Gender invalid
-                  value:
-                    data:
-                    code: '200003'
-                    status: FAILURE
-                    message: gender isn't in supported list
-                dob_invalid_format:
-                  summary: Date of birth invalid format
-                  value:
-                    data:
-                    code: '200002'
-                    status: FAILURE
-                    message: Invalid dob format
-                dob_user_under_18:
-                  summary: User under 18
-                  value:
-                    data:
-                    code: '203004'
-                    status: FAILURE
-                    message: Date of birth must be dd/MM/yyyy or earlier
-                invalid_consent_receipt:
-                  summary: Invalid consent receipt
-                  value:
-                    data:
-                    code: '203022'
-                    status: FAILURE
-                    message: Invalid consent receipt
+              example:
+                message: username has already existed
+                status: FAILURE
+                code: 202001
+                data: null
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                message: Invalid access token
-                code: '203015'
-                status: FAILURE
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 203015: Invalid access token |
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              examples:
-                Access denied:
-                  summary: Access denied
-                  value:
-                    data:
-                    message: Access denied
-                    code: '203016'
-                    status: FAILURE
+          description: |
+            **Forbidden**
+            | Error Code: Message |
+            | -- |
+            | 203016: Access denied |
         '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponseData"
-              example:
-                data:
-                code: '100500'
-                status: FAILURE
-                message: Error detail message
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
 components:
   securitySchemes:
     bearerAuth:
@@ -742,8 +421,6 @@ components:
       type: object
       required:
         - password
-        - first_name
-        - last_name
       properties:
         password:
           type: string
