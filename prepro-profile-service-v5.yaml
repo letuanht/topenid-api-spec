@@ -906,184 +906,184 @@ paths:
             | Error Code:  Message |
             | -- |
             | 100500:  Error detail message |
-  #  "/contact-management/contacts":
-  #    get:
-  #      tags:
-  #        - Contact Info APIs
-  #      security:
-  #        - bearerAuth: []
-  #      operationId: getListContactInfo
-  #      summary: Retrieve contact list (emails, phones, postal addresses) of user profile
-  #      description: This API allows to retrieve contact list (emails, phones, postal
-  #        addresses) of user profile
-  #      parameters:
-  #        - name: Client-Token
-  #          in: header
-  #          required: true
-  #          schema:
-  #            type: string
-  #          description: Bearer {client access token}
-  #        - name: Authorization
-  #          in: header
-  #          required: true
-  #          schema:
-  #            type: string
-  #          description: Bearer {user access token}
-  #        - name: lang
-  #          in: query
-  #          schema:
-  #            type: string
-  #          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
-  #        - name: type
-  #          in: query
-  #          required: false
-  #          schema:
-  #            type: string
-  #            enum:
-  #              - PHONE
-  #              - EMAIL
-  #              - POSTAL_ADDRESS
-  #            example: PHONE
-  #      responses:
-  #        '200':
-  #          description: OK
-  #          content:
-  #            application/json:
-  #              schema:
-  #                allOf:
-  #                  - "$ref": "#/components/schemas/ResponseData"
-  #                  - type: object
-  #                    properties:
-  #                      data:
-  #                        "$ref": "#/components/schemas/PersonalContactInfoResponse"
-  #              examples:
-  #                default:
-  #                  summary: Type is not passed
-  #                  value:
-  #                    message: The request completed successfully
-  #                    data:
-  #                      ht_id: '2828917688328040'
-  #                      emails:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: true
-  #                          tags:
-  #                          value: string
-  #                          last_modified_date: 1625454349735
-  #                      phones:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: true
-  #                          tags:
-  #                          value: string
-  #                          last_modified_date: 1625454349735
-  #                      addresses:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: false
-  #                          tags:
-  #                          value: string
-  #                          city: string
-  #                          city_code: string
-  #                          district: string
-  #                          district_code: string
-  #                          ward: string
-  #                          ward_code: string
-  #                          other: string
-  #                          last_modified_date: 1625454349735
-  #                    status: SUCCESS
-  #                    code: null
-  #                type_is_email:
-  #                  summary: Type Email
-  #                  value:
-  #                    message: The request completed successfully
-  #                    data:
-  #                      ht_id: '2828917688328040'
-  #                      emails:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: true
-  #                          tags:
-  #                          value: string
-  #                          last_modified_date: 1625454349735
-  #                      phones: []
-  #                      addresses: []
-  #                    status: SUCCESS
-  #                    code: null
-  #                type_is_phones:
-  #                  summary: Type Phone
-  #                  value:
-  #                    message: The request completed successfully
-  #                    data:
-  #                      ht_id: '2828917688328040'
-  #                      phones:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: true
-  #                          tags:
-  #                          value: string
-  #                          last_modified_date: 1625454349735
-  #                      addresses: []
-  #                      emails: []
-  #                    status: SUCCESS
-  #                    code: null
-  #                type_is_address:
-  #                  summary: Type Address
-  #                  value:
-  #                    message: The request completed successfully
-  #                    data:
-  #                      ht_id: '2828917688328040'
-  #                      addresses:
-  #                        - id: string
-  #                          primary: true
-  #                          verified: true
-  #                          tags:
-  #                          value: string
-  #                          city: string
-  #                          city_code: string
-  #                          district: string
-  #                          district_code: string
-  #                          ward: string
-  #                          ward_code: string
-  #                          other: string
-  #                          last_modified_date: 1625454349735
-  #                      emails: []
-  #                      phones: []
-  #                    status: SUCCESS
-  #                    code: null
-  #        '400':
-  #          description: |
-  #            **Bad Request**
-  #            | Error Code:  Message |
-  #            | -- |
-  #            | 200003:  type isn't in supported list |
-  #          content:
-  #            application/json:
-  #              example:
-  #                message: type isn't in supported list
-  #                status: FAILURE
-  #                code: 200003
-  #                data: null
-  #        '401':
-  #          description: |
-  #            **Unauthorized**
-  #            | Error Code:  Message |
-  #            | -- |
-  #            | 203015:  Invalid access token |
-  #            | 900901: Invalid authentication information provided |
-  #            | 900902: No authentication information provided |
-  #        '403':
-  #          description: |
-  #            **Forbidden**
-  #            | Error Code:  Message |
-  #            | -- |
-  #            | 203016:  Access denied |
-  #        '500':
-  #          description: |
-  #            **Internal server error**
-  #            | Error Code:  Message |
-  #            | -- |
-  #            | 100500:  Error detail message |
+  "/contact-management/contacts":
+    get:
+      tags:
+        - Contact Info APIs
+      security:
+        - bearerAuth: []
+      operationId: getListContactInfo
+      summary: Retrieve contact list (emails, phones, postal addresses) of user profile
+      description: This API allows to retrieve contact list (emails, phones, postal
+        addresses) of user profile
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {user access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - PHONE
+              - EMAIL
+              - POSTAL_ADDRESS
+            example: PHONE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        "$ref": "#/components/schemas/PersonalContactInfoResponse"
+              examples:
+                default:
+                  summary: Type is not passed
+                  value:
+                    message: The request completed successfully
+                    data:
+                      ht_id: '2828917688328040'
+                      emails:
+                        - id: string
+                          primary: true
+                          verified: true
+                          tags:
+                          value: string
+                          last_modified_date: 1625454349735
+                      phones:
+                        - id: string
+                          primary: true
+                          verified: true
+                          tags:
+                          value: string
+                          last_modified_date: 1625454349735
+                      addresses:
+                        - id: string
+                          primary: true
+                          verified: false
+                          tags:
+                          value: string
+                          city: string
+                          city_code: string
+                          district: string
+                          district_code: string
+                          ward: string
+                          ward_code: string
+                          other: string
+                          last_modified_date: 1625454349735
+                    status: SUCCESS
+                    code: null
+                type_is_email:
+                  summary: Type Email
+                  value:
+                    message: The request completed successfully
+                    data:
+                      ht_id: '2828917688328040'
+                      emails:
+                        - id: string
+                          primary: true
+                          verified: true
+                          tags:
+                          value: string
+                          last_modified_date: 1625454349735
+                      phones: []
+                      addresses: []
+                    status: SUCCESS
+                    code: null
+                type_is_phones:
+                  summary: Type Phone
+                  value:
+                    message: The request completed successfully
+                    data:
+                      ht_id: '2828917688328040'
+                      phones:
+                        - id: string
+                          primary: true
+                          verified: true
+                          tags:
+                          value: string
+                          last_modified_date: 1625454349735
+                      addresses: []
+                      emails: []
+                    status: SUCCESS
+                    code: null
+                type_is_address:
+                  summary: Type Address
+                  value:
+                    message: The request completed successfully
+                    data:
+                      ht_id: '2828917688328040'
+                      addresses:
+                        - id: string
+                          primary: true
+                          verified: true
+                          tags:
+                          value: string
+                          city: string
+                          city_code: string
+                          district: string
+                          district_code: string
+                          ward: string
+                          ward_code: string
+                          other: string
+                          last_modified_date: 1625454349735
+                      emails: []
+                      phones: []
+                    status: SUCCESS
+                    code: null
+        '400':
+          description: |
+            **Bad Request**
+            | Error Code:  Message |
+            | -- |
+            | 200003:  type isn't in supported list |
+          content:
+            application/json:
+              example:
+                message: type isn't in supported list
+                status: FAILURE
+                code: 200003
+                data: null
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code:  Message |
+            | -- |
+            | 203015:  Invalid access token |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
+        '403':
+          description: |
+            **Forbidden**
+            | Error Code:  Message |
+            | -- |
+            | 203016:  Access denied |
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code:  Message |
+            | -- |
+            | 100500:  Error detail message |
   "/contact-management/phones":
     get:
       tags:
