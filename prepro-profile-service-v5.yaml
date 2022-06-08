@@ -1347,7 +1347,7 @@ paths:
                     message: The request completed successfully
                     data:
                       ht_id: '2828917688328040'
-                      email:
+                      phone:
                         id: string
                         primary: false
                         verified: true
