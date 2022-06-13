@@ -1339,7 +1339,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: '#/components/schemas/ContactEmailVerificationResponse'
+                        $ref: '#/components/schemas/ContactPhoneVerificationResponse'
               examples:
                 default:
                   summary: The request completed successfully
@@ -3386,6 +3386,13 @@ components:
         ht_id:
           type: string
         email:
+          "$ref": "#/components/schemas/ContactInfoDto"
+    ContactPhoneVerificationResponse:
+      type: object
+      properties:
+        ht_id:
+          type: string
+        phone:
           "$ref": "#/components/schemas/ContactInfoDto"
     ContactEmailAddingRequest:
       type: object
