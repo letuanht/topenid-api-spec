@@ -13,6 +13,78 @@ tags:
   - name: Topen Configuration APIs
   - name: Master Data
 paths:
+  "/accounts/send-invitation":
+    post:
+      tags:
+        - Account APIs
+      operationId: sendInvitation
+      summary: Send SMS/EMAIL invitation for user
+      description: "Send SMS/EMAIL invitation for user"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendInvitationRequest"
+        required: true
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        type: string
+              example:
+                data: null
+                message: The request completed successfully
+                code: null
+                status: SUCCESS
+        '400':
+          description: |
+            **Bad Request**
+            | Error Code: Message |
+            | -- |
+            | 200001: channel cannot be blank |
+            | 200001: receiver cannot be blank |
+            | 200002: Invalid receiver format |
+            | 200003: channel isn't in supported list |
+            | 203047: The invitation message template has not been created |
+          content:
+            application/json:
+              example:
+                message: channel cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
   "/accounts/register":
     post:
       tags:
@@ -92,6 +164,80 @@ paths:
             application/json:
               example:
                 message: verification_id cannot be blank
+                status: FAILURE
+                code: 200001
+                data: null
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code: Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code: Message |
+            | -- |
+            | 100500: Error detail message |
+  "/accounts/exist":
+    post:
+      tags:
+        - Account APIs
+      operationId: checkExistedAccount
+      summary: Check the existence of an accountid
+      description: This API allows RP to check the existence of an accountid. If the "used" field is TRUE in the response then that accountID has existed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CheckingAccountRequest"
+        required: true
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        "$ref": "#/components/schemas/CheckingAccountResponse"
+              examples:
+                checking_successful:
+                  summary: Checking account successful
+                  value:
+                    data:
+                      - used: true
+                        checking_at: 1625454349735
+                    message: The request completed successfully
+                    code: null
+                    status: SUCCESS
+        '400':
+          description: |
+            **Bad Request**
+            | Error Code:  Message |
+            | -- |
+            | 200001:  account_id cannot be blank |
+            | 200002:  Invalid account_id format |
+          content:
+            application/json:
+              example:
+                message: account_id cannot be blank
                 status: FAILURE
                 code: 200001
                 data: null
@@ -2767,6 +2913,77 @@ paths:
             | Error Code:  Message |
             | -- |
             | 100500:  Error detail message |
+  "/configurations/invitation-template":
+    get:
+      tags:
+        - Topen Configuration APIs
+      operationId: getInvitationTemplateByReplyingParty
+      summary: Fetch the invitation template list
+      description: This API allows RP to fetch the invitation template list.
+      parameters:
+        - name: Client-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Bearer {client access token}
+        - name: lang
+          in: query
+          schema:
+            type: string
+          description: lang=vi or lang=en (If lang is missing, the default vi language will be return)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - "$ref": "#/components/schemas/ResponseData"
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/InvitationTemplateDto"
+              examples:
+                retrieve_successful:
+                  summary: Retrieve invitation template successful
+                  value:
+                    status: SUCCESS
+                    code: null
+                    message: The request completed successfully
+                    data:
+                      - channel: EMAIL
+                        subject: Xin chao
+                        content: The invitation template for email
+                        brand_name: TOPENLAND
+                        last_modified_date: 1625454349735
+                      - channel: SMS
+                        subject: ""
+                        content: The invitation template for the sms
+                        brand_name: TOPENLAND
+                        last_modified_date: 1625454349735
+        '401':
+          description: |
+            **Unauthorized**
+            | Error Code:  Message |
+            | -- |
+            | 900901: Invalid authentication information provided |
+            | 900902: No authentication information provided |
+          content:
+            application/json:
+              example:
+                message: Invalid access token
+                status: FAILURE
+                code: 900901
+                data: null
+        '500':
+          description: |
+            **Internal server error**
+            | Error Code:  Message |
+            | -- |
+            | 100500:  Error detail message |
   "/master-data/addresses":
     get:
       tags:
@@ -2920,6 +3137,25 @@ components:
           items:
             type: string
             example: 61c870402b9c37dfa3220c21
+    CheckingAccountRequest:
+      type: object
+      required:
+        - account_id
+      properties:
+        account_id:
+          type: string
+          description: Phone number
+          example: "0909777888"
+    CheckingAccountResponse:
+      type: object
+      properties:
+        used:
+          type: boolean
+        checking_at:
+          type: integer
+          format: int64
+          example: 1625454349735
+          description: Unix timestamps in miliseconds.
     UpdatePasswordRequest:
       type: object
       required:
@@ -3461,3 +3697,42 @@ components:
           type: string
         level:
           type: string
+    InvitationTemplateDto:
+      type: object
+      properties:
+        channel:
+          type: string
+          example: SMS
+        subject:
+          type: string
+          example: '[Hưng Thịnh Land] Mời sử dụng dịch vụ'
+        content:
+          type: string
+          example: 'HUNGTHINH: Chuc mung ban da nhan duoc loi moi trai nghiem ung dung Hung Thịnh Mobile. Truy cap trai nghiem ngay tai: ${link}.'
+        brand_name:
+          type: string
+          example: TOPENLAND
+        last_modified_date:
+          type: integer
+          format: int64
+          example: 1625454349735
+          description: Unix timestamps in miliseconds.
+    SendInvitationRequest:
+      type: object
+      required:
+        - channel
+        - receiver
+      properties:
+        channel:
+          type: string
+          enum:
+            - SMS
+            - EMAIL
+          example: SMS
+        receiver:
+          type: string
+          description: Request receiver contact.
+          example: '0377884111'
+        data:
+          type: object
+          description: Dynamics data key-value for config template.
