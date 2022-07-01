@@ -18,8 +18,8 @@ paths:
       tags:
         - Account APIs
       operationId: sendInvitation
-      summary: Send SMS/EMAIL invitation for user
-      description: "Send SMS/EMAIL invitation for user"
+      summary: Allows sending the onboarding invitation to users via SMS/EMAIL
+      description: This API allows sending the onboarding invitation to users via SMS/EMAIL
       requestBody:
         content:
           application/json:
@@ -261,8 +261,8 @@ paths:
       security:
         - bearerAuth: []
       operationId: updatePassword
-      summary: RP to change password for user under the user's authorization
-      description: This API allows RP to change password for user under the user's authorization
+      summary: Update the password of users
+      description: This API allows updating the password of users
       requestBody:
         content:
           application/json:
@@ -356,8 +356,8 @@ paths:
       tags:
         - Account APIs
       operationId: resetPassword
-      summary: Reset password on behalf of user
-      description: This API allows RP reset password on behalf of user
+      summary: Reset the password of users when they forgot the password
+      description: This API allows resetting the password of users when they forgot the password
       requestBody:
         content:
           application/json:
@@ -431,7 +431,8 @@ paths:
       tags:
         - Account APIs
       operationId: forceResetPassword
-      summary: RP force reset password for user
+      summary: Force reset passwords when their password is expired
+      description: This API allows RP to force reset passwords when their password is expired
       requestBody:
         content:
           application/json:
@@ -2918,8 +2919,8 @@ paths:
       tags:
         - Topen Configuration APIs
       operationId: getInvitationTemplateByReplyingParty
-      summary: Fetch the invitation template list
-      description: This API allows RP to fetch the invitation template list.
+      summary: Fetch the invitation templates
+      description: This API allows RP to fetch the invitation templates.
       parameters:
         - name: Client-Token
           in: header
