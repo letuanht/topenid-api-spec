@@ -565,7 +565,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2660,7 +2660,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2721,7 +2721,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2782,7 +2782,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2843,7 +2843,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2904,7 +2904,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -2975,7 +2975,7 @@ paths:
           content:
             application/json:
               example:
-                message: Invalid access token
+                message: Invalid authentication information provided
                 status: FAILURE
                 code: 900901
                 data: null
@@ -3736,4 +3736,5 @@ components:
           example: '0377884111'
         data:
           type: object
-          description: Dynamics data key-value for config template.
+          description: Data input into placeholder in the invitation template. Format will follow key:value.
+          example: {company: TOPENLAND}

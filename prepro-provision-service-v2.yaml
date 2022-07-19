@@ -61,14 +61,8 @@ paths:
             | 200002: Invalid username format |
             | 202001: username has already existed |
             | 200001: password cannot be blank |
-            | 200010: Password must be between 8 and 30 characters, contain a digit[0-9], a lower case letter[a-z], an upper case letter[A-Z] |
-            | 200001: first_name cannot be blank |
-            | 200004: first_name's length must be less than 256 |
-            | 200001: last_name cannot be blank |
-            | 200004: last_name's length must be less than 256 |
             | 200003: gender isn't in supported list |
             | 200002: Invalid dob format |
-            | 203004: Date of birth must be dd/MM/yyyy or earlier |
             | 200002: Invalid contact_phone format |
             | 203037: The contact phone has been duplicated with the primary phone |
             | 200002: Invalid email format |
@@ -150,13 +144,8 @@ paths:
             | Error Code: Message |
             | -- |
             | 200001: username cannot be blank |
-            | 200001: first_name cannot be blank |
-            | 200004: first_name's length must be less than 256 |
-            | 200001: last_name cannot be blank |
-            | 200004: last_name's length must be less than 256 |
             | 200003: gender isn't in supported list |
             | 200002: Invalid dob format |
-            | 203004: Date of birth must be dd/MM/yyyy or earlier |
             | 200002: Invalid contact_phone format |
             | 203037: The contact phone has been duplicated with the primary phone |
             | 200002: Invalid email format |
@@ -331,8 +320,6 @@ components:
       type: object
       required:
         - username
-        - first_name
-        - last_name
         - password
       properties:
         username:
@@ -342,18 +329,12 @@ components:
           example: "0912345678"
         password:
           type: string
-          minLength: 8
-          maxLength: 30
-          description: Password must be between 8 and 30 characters, contain a digit[0-9],
-            a lower case letter[a-z], an upper case letter[A-Z]
           example: hgn5lnshd4A
         first_name:
           type: string
-          maxLength: 255
           example: Thảo Nguyên
         last_name:
           type: string
-          maxLength: 255
           example: Trần
         gender:
           type: string
@@ -384,17 +365,12 @@ components:
             example: 61c870402b9c37dfa3220c21
     UpdateUserProfileRequest:
       type: object
-      required:
-        - first_name
-        - last_name
       properties:
         first_name:
           type: string
-          maxLength: 255
           example: Thảo Nguyên
         last_name:
           type: string
-          maxLength: 255
           example: Trần
         gender:
           type: string
